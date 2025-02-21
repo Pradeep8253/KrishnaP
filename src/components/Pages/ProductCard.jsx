@@ -10,6 +10,7 @@ import deberakingmachinemanual from "./fwdkrishnatradersproducts/deberakingmachi
 import gasbrooder from "./fwdkrishnatradersproducts/gasbrooder.jpg";
 import growerdrinker8ltr from "./fwdkrishnatradersproducts/growerdrinker8ltr.jpg";
 import CounterSection from "./Products/CounterSection";
+import BasinChickDrinker from "../Pages/fwdkrishnatradersproductsmain/BasinChickDrinker2.5.jpg";
 
 const ProductCard = ({ product }) => (
   <motion.div
@@ -24,7 +25,7 @@ const ProductCard = ({ product }) => (
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-64 object-cover"
+          className="w-full h-56 object-cover"
           onError={(e) => {
             e.target.src = "/placeholder-image.png";
           }}
@@ -63,7 +64,7 @@ const Products = () => {
       {
         name: "Parent Stock Feeder",
         image: cagebabydrinker,
-        description: "Advanced feeder system for parent stock management",
+        description: "Advanced feeder  for parent stock management",
         link: "parent-stock-feeder",
       },
       {
@@ -118,24 +119,23 @@ const Products = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header Section */}
       <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold text-red-600 sm:text-5xl mb-6">
+        <h1 className="text-3xl font-bold text-red-600 sm:text-5xl mb-6">
           Welcome To Krishna Poultry{" "}
           <span className="text-black">Equipments Manufacturer</span> & Traders
         </h1>
 
-        <div className="mb-8">
+        <div className="mb-15">
           <h2 className="text-3xl font-semibold text-gray-800 inline-block border-b-4 border-red-500 pb-2">
             Our Products
           </h2>
         </div>
 
-        <div className="max-w-3xl mx-auto mb-12">
+        <div className="max-w-xl mx-auto mb-12">
           <img
-            src={chickdrinker3ltr}
+            src={BasinChickDrinker}
             alt="Featured Product"
             className="w-full h-66 object-contain rounded-xl shadow-lg"
           />
-        
         </div>
 
         <CounterSection />
