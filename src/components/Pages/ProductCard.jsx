@@ -15,37 +15,31 @@ import ImageCarousel from "./Products/ImageCrousel";
 
 const ProductCard = ({ product }) => (
   <motion.div
-    className="w-full sm:w-1/2 lg:w-1/3 p-4"
+    className="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-4"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     whileHover={{ scale: 1.02 }}
     transition={{ duration: 0.3 }}
   >
     <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-      <div className="relative aspect-w-16 aspect-h-9">
+      <div className="relative">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-56 object-cover"
+          className="w-full h-48 sm:h-56 object-cover"
           onError={(e) => {
             e.target.src = "/placeholder-image.png";
           }}
         />
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+      <div className="p-4 sm:p-6">
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
           {product.name}
         </h3>
-        <p className="text-gray-600 mb-4 line-clamp-2">
+        <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-2">
           {product.description ||
             "High-quality poultry equipment for your farming needs"}
         </p>
-        {/* <Link
-          to={`/product/${product.link}`}
-          className="block w-full text-center bg-red-500 text-white py-3 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300"
-        >
-          View Details
-        </Link> */}
       </div>
     </div>
   </motion.div>
@@ -54,18 +48,14 @@ const ProductCard = ({ product }) => (
 const Products = () => {
   const [activeTab, setActiveTab] = useState("equipment");
 
-  const categories = [
-    { id: "equipment", title: "Poultry Equipment" },
-    // { id: "feeders", title: "Feeders & Drinkers" },
-    // { id: "accessories", title: "Accessories" },
-  ];
+  const categories = [{ id: "equipment", title: "Poultry Equipment" }];
 
   const productsData = {
     equipment: [
       {
         name: "Parent Stock Feeder",
         image: cagebabydrinker,
-        description: "Advanced feeder  for parent stock management",
+        description: "Advanced feeder for parent stock management",
         link: "parent-stock-feeder",
       },
       {
@@ -117,41 +107,39 @@ const Products = () => {
   };
 
   return (
-    <div className="max-w-8xl  bg-gradient-to-r from-[#9c95a1] via-[#e6a5a5] to-[#d9d8d7] mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
+    <div className="w-full bg-gradient-to-r from-[#9c95a1] via-[#e6a5a5] to-[#d9d8d7] px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       {/* Header Section */}
-      <div className="text-center mb-16">
-        <h1 className="text-3xl font-bold text-red-600 sm:text-5xl mb-6 mx-55">
+      <div className="text-center mb-8 sm:mb-16">
+        <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-red-600 mb-4 sm:mb-6 px-2 sm:px-4">
           Welcome To Krishna Poultry{" "}
           <span className="text-black">Equipments Manufacturer</span> & Traders
         </h1>
-        <div className="mb-15">
-          <h2 className="text-3xl font-semibold text-gray-800 inline-block border-b-4 border-red-500 pb-2">
+        <div className="mb-8">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 inline-block border-b-4 border-red-500 pb-2">
             Our Products
           </h2>
         </div>
-        {/* <div className="max-w-xl mx-auto mb-12">
-          <img
-            src={BasinChickDrinker}
-            alt="Featured Product"
-            className="w-full h-66 object-contain rounded-xl shadow-lg"
-          />
-        </div> */}
-        <ImageCarousel />
+
+        <div className="max-w-full sm:max-w-xl mx-auto">
+          <ImageCarousel />
+        </div>
+
         <CounterSection />
-        <p className="mt-8 text-xl text-gray-600 max-w-2xl mx-auto">
+
+        <p className="mt-6 sm:mt-8 text-base sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
           High-quality equipment designed to meet all your poultry farming
           needs.
         </p>
       </div>
 
       {/* Category Navigation */}
-      <div className="mb-12">
-        <nav className="flex flex-wrap justify-center gap-4 mx-48">
+      <div className="mb-8 sm:mb-12">
+        <nav className="flex flex-wrap justify-center gap-2 sm:gap-4 px-2 sm:px-8">
           {categories.map((category) => (
             <motion.button
               key={category.id}
               onClick={() => setActiveTab(category.id)}
-              className={`px-8 py-3 text-lg font-medium rounded-full transition-colors duration-300 ${
+              className={`px-4 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-medium rounded-full transition-colors duration-300 ${
                 activeTab === category.id
                   ? "bg-red-500 text-white shadow-md"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -173,7 +161,7 @@ const Products = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="flex flex-wrap -mx-4"
+          className="flex flex-wrap -mx-2 sm:-mx-4"
         >
           {productsData[activeTab]?.map((product, index) => (
             <ProductCard key={index} product={product} />
