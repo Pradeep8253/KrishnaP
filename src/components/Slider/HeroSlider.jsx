@@ -4,6 +4,10 @@ import BasinChickDrinker from "../Pages/fwdkrishnatradersproductsmain/BasinChick
 import flamegun from "../Pages/fwdkrishnatradersproductsmain/flamegun4way.jpg";
 import jumboautomaticdrinkerclassic from "../Pages/fwdkrishnatradersproductsmain/jumboautomaticdrinkerclassic.jpg";
 import SprinklerSmall from "../Pages/fwdkrishnatradersproductsmain/SprinklerSmall.jpg";
+import chickfeeder3kg from "../Pages/fwdkrishnatradersproducts/chickfeeder3kg.jpg";
+import chickcrate from "../Pages/fwdkrishnatradersproducts/chickcrate.jpg";
+import nippledrinker from "../Pages/fwdkrishnatradersproducts/nippledrinker.jpg";
+import vaccinator from "../Pages/fwdkrishnatradersproducts/vaccinator.jpg";
 import slider1 from "../Slider/sloider1.png";
 import slider2 from "../Slider/slider2.png";
 import slider4 from "../Slider/slider4.png";
@@ -29,8 +33,8 @@ const WelcomeSlider = () => {
     {
       backgroundImage: slider2,
       images: [
-        BasinChickDrinker,
-        flamegun,
+        chickfeeder3kg,
+        chickcrate,
         jumboautomaticdrinkerclassic,
         SprinklerSmall,
       ],
@@ -41,8 +45,8 @@ const WelcomeSlider = () => {
     {
       backgroundImage: slider4,
       images: [
-        BasinChickDrinker,
-        flamegun,
+        nippledrinker,
+        vaccinator,
         jumboautomaticdrinkerclassic,
         SprinklerSmall,
       ],
