@@ -13,7 +13,7 @@ const FloatingActionFooter = () => {
 
       {/* WhatsApp Button - Bottom Right */}
       <a
-        href="https://wa.me/7678433751"
+        href="https://wa.me/9870214842"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-20 right-4 bg-green-500 p-3 rounded-full flex items-center justify-center hover:bg-green-600 transition-all shadow-lg"

@@ -10,6 +10,7 @@ import {
   Youtube,
 } from "lucide-react";
 import FloatingActionFooter from "./FloatingActionFooter";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -36,10 +37,10 @@ const Footer = () => {
   ];
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about-us", label: "About" },
-    { href: "/products", label: "Products" },
-    { href: "/contact", label: "Contact" },
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
+    { to: "/products", label: "Products" },
+    { to: "/contact", label: "Contact" },
   ];
 
   return (
@@ -58,12 +59,12 @@ const Footer = () => {
               <ul className="space-y-3">
                 {navLinks.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.to}
                       className="hover:text-white transition-colors duration-200 block"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
