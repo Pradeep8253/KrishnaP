@@ -116,10 +116,10 @@ const Products = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-8xl  bg-gradient-to-r from-[#9c95a1] via-[#e6a5a5] to-[#d9d8d7] mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
       {/* Header Section */}
       <div className="text-center mb-16">
-        <h1 className="text-3xl font-bold text-red-600 sm:text-5xl mb-6">
+        <h1 className="text-3xl font-bold text-red-600 sm:text-5xl mb-6 mx-55">
           Welcome To Krishna Poultry{" "}
           <span className="text-black">Equipments Manufacturer</span> & Traders
         </h1>
@@ -148,7 +148,7 @@ const Products = () => {
 
       {/* Category Navigation */}
       <div className="mb-12">
-        <nav className="flex flex-wrap justify-center gap-4">
+        <nav className="flex flex-wrap justify-center gap-4 mx-48">
           {categories.map((category) => (
             <motion.button
               key={category.id}
