@@ -102,7 +102,7 @@ const Header = () => {
                 src="/logo.png"
                 alt="Krishna Poultry Logo"
                 className={`transition-all duration-300 ${
-                  isScrolled ? "h-16" : "h-16"
+                  isScrolled ? "h-16" : "h-15"
                 } w-auto`}
               />
             </Link>
