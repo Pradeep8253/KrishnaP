@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => (
     transition={{ duration: 0.3 }}
   >
     <Link to={`/product/${product.link}`} className="block">
-      <div className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+      <div className="rounded-lg overflow-hidden shadow-2xl hover:shadow-lg transition-shadow duration-300 bg-center">
         <img
           src={product.image}
           alt={product.name}
@@ -32,12 +32,12 @@ const ProductCard = ({ product }) => (
           }}
         />
         <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">
-            {product.name}
+          <h3 className="text-sm text-center font-semibold text-gray-800 mb-2">
+            {/* {product.name} */}
           </h3>
-          <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300">
+          {/* <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300">
             View Details
-          </button>
+          </button> */}
         </div>
       </div>
     </Link>
@@ -65,7 +65,7 @@ const Products = () => {
         link: "chick-drinker",
       },
       {
-        name: "Debeaking Machine Automatic",
+        name: "Debeaking Machine",
         image: debeakingmachineautomatic,
         link: "jumbo-drinker",
       },

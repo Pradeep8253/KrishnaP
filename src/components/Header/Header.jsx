@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../Header/Header.css"
+import TopHeader from "./TopHeader"
 import { Link } from "react-router-dom";
 import {
   Menu,
@@ -82,6 +83,7 @@ const Header = () => {
       }`}
     >
       {/* Top Bar */}
+      {/* <TopHeader /> */}
 
       {/* Main Header */}
       <div
@@ -100,7 +102,7 @@ const Header = () => {
                 src="/logo.png"
                 alt="Krishna Poultry Logo"
                 className={`transition-all duration-300 ${
-                  isScrolled ? "h-18" : "h-20"
+                  isScrolled ? "h-16" : "h-16"
                 } w-auto`}
               />
             </Link>

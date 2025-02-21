@@ -89,7 +89,7 @@ const Banner = ({ title, image, breadcrumbItems }) => {
             <div className="page-banner-cont text-left mt-10">
               <motion.h2
                 variants={titleVariants}
-                className="text-4xl font-bold text-white ml-4 hover:scale-105 transition-transform duration-300"
+                className="text-4xl font-bold text-white text-center ml-4 hover:scale-105 transition-transform duration-300"
               >
                 {title}
               </motion.h2>
@@ -106,7 +106,7 @@ const Banner = ({ title, image, breadcrumbItems }) => {
                     >
                       <Link
                         to={item.link}
-                        className="text-white hover:text-gray-300 transition-colors duration-300"
+                        className="text-white hover:text-gray-300 transition-colors duration-300 text-center justify-center"
                       >
                         {item.name}
                       </Link>

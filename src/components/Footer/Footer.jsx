@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, Phone, Clock, MapPin, Facebook, Twitter, Linkedin, Youtube } from 'lucide-react';
+import FloatingActionFooter from './FloatingActionFooter';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -40,15 +41,18 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
           {/* Company Info */}
           <div className="space-y-6">
-            <img src="/logo.png" alt="Krishna Poultry Equipment Logo" className="h-12 w-auto" />
+            <img
+              src="/logo.png"
+              alt="Krishna Poultry Equipment Logo"
+              className="h-12 w-auto"
+            />
             <nav>
               <ul className="space-y-3">
                 {navLinks.map((link) => (
                   <li key={link.label}>
-                    <a 
+                    <a
                       href={link.href}
                       className="hover:text-white transition-colors duration-200 block"
                     >
@@ -81,7 +85,10 @@ const Footer = () => {
               ))}
               <p className="text-sm flex items-center space-x-2">
                 <Mail className="h-5 w-5" />
-                <a href="mailto:info@krishnapoultry.com" className="hover:text-white">
+                <a
+                  href="mailto:info@krishnapoultry.com"
+                  className="hover:text-white"
+                >
                   info@krishnapoultry.com
                 </a>
               </p>
@@ -145,6 +152,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <FloatingActionFooter />
     </footer>
   );
 };
