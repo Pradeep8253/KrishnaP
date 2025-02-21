@@ -8,7 +8,7 @@ const FloatingActionFooter = () => {
   return (
     <div className="bg-black backdrop-blur-sm fixed bottom-0 w-full py-3 px-4 flex justify-between items-center z-50">
       <span className="text-sm font-medium text-center text-white justify-between ">
-        Krishna Poultry Equip Manufacturer & Trader
+        Krishna Poultry Equipments Manufacturer & Traders
       </span>
 
       {/* WhatsApp Button - Bottom Right */}
@@ -23,7 +23,8 @@ const FloatingActionFooter = () => {
 
       {/* Phone Call Button - Bottom Left */}
       <a
-        href="tel:7236941347"
+        href="tel:
++91-9870214842 "
         className="fixed bottom-20 left-4 bg-blue-500 p-3 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all shadow-lg"
       >
         <FaPhoneAlt className="text-xl text-white" />

@@ -1,39 +1,45 @@
-import React from 'react';
-import { Mail, Phone, Clock, MapPin, Facebook, Twitter, Linkedin, Youtube } from 'lucide-react';
-import FloatingActionFooter from './FloatingActionFooter';
+import React from "react";
+import {
+  Mail,
+  Phone,
+  Clock,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Youtube,
+} from "lucide-react";
+import FloatingActionFooter from "./FloatingActionFooter";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   const locations = [
     {
       name: "Hyderabad Factory - Kondapur",
-      address: "Industrial Park Kondapur, Medak Dist - 502 336, Telangana",
-      phone: "9440406200, 9849059508"
+      address:
+        "Reg. Office & Godown:- Kh. No.1090, Vikas Nagar, Meerut Road, Ghaziabad-201001 (U.P.) INDIA ",
+      phone: "9440406200, 9849059508",
     },
     {
-      name: "Karimnagar Factory",
-      address: "Behind Petrol Bunk, Padmanagar, Karimnagar - 505002, Telangana",
+      name: "Reg. Office & Godown",
+      address:
+        "Kh. No.1090, Vikas Nagar, Meerut Road, Ghaziabad-201001 (U.P.) INDIA ",
     },
-    {
-      name: "Hyderabad Sales Depot - Nagole",
-      address: "Plot No: 16, Road No: 2, Mamatanagar Colony, Nagole, Hyderabad - 68",
-      phone: "9246659508, 8897911508"
-    }
   ];
 
   const socialLinks = [
     { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Youtube, href: "#", label: "Youtube" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" }
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
   ];
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about-us", label: "About" },
     { href: "/products", label: "Products" },
-    { href: "/contact", label: "Contact" }
+    { href: "/contact", label: "Contact" },
   ];
 
   return (
@@ -86,10 +92,10 @@ const Footer = () => {
               <p className="text-sm flex items-center space-x-2">
                 <Mail className="h-5 w-5" />
                 <a
-                  href="mailto:info@krishnapoultry.com"
+                  href="mailto:krishnatraders1997@gmail.com"
                   className="hover:text-white"
                 >
-                  info@krishnapoultry.com
+                  krishnatraders1997@gmail.com
                 </a>
               </p>
             </div>
@@ -119,7 +125,7 @@ const Footer = () => {
           {/* Map */}
           <div className="space-y-6">
             <h3 className="text-white text-lg font-semibold">Location</h3>
-            <div className="rounded-lg overflow-hidden">
+            {/* <div className="rounded-lg overflow-hidden">
               <iframe
                 className="w-full h-48"
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15503130.135087622!2d79.097002!3d18.440857!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bccdfd080c233b3%3A0xdffdfa7ea808c2b6!2sSai%20krishna%20poultry%20equipments!5e0!3m2!1sen!2sin!4v1731940118279!5m2!1sen!2sin"
@@ -127,7 +133,7 @@ const Footer = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Krishna Poultry Equipment Location"
               />
-            </div>
+            </div> */}
           </div>
         </div>
 

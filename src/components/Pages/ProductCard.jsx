@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import cagebabydrinker from "../Pages/fwdkrishnatradersproducts/cagebabydrinker.jpg";
 import chickcrate from "../Pages/fwdkrishnatradersproducts/chickcrate.jpg";
 import chickdrinker3ltr from "./fwdkrishnatradersproducts/chickdrinker3ltr.jpg";
@@ -11,144 +11,177 @@ import gasbrooder from "./fwdkrishnatradersproducts/gasbrooder.jpg";
 import growerdrinker8ltr from "./fwdkrishnatradersproducts/growerdrinker8ltr.jpg";
 import CounterSection from "./Products/CounterSection";
 
-
-
 const ProductCard = ({ product }) => (
   <motion.div
-    className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-4"
+    className="w-full sm:w-1/2 lg:w-1/3 p-4"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    whileHover={{ scale: 1.05 }}
+    whileHover={{ scale: 1.02 }}
     transition={{ duration: 0.3 }}
   >
-    <Link to={`/product/${product.link}`} className="block">
-      <div className="rounded-lg overflow-hidden shadow-2xl hover:shadow-lg transition-shadow duration-300 bg-center">
+    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <div className="relative aspect-w-16 aspect-h-9">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-48 object-cover"
+          className="w-full h-64 object-cover"
           onError={(e) => {
-            e.target.src = "path/to/default/image.png";
+            e.target.src = "/placeholder-image.png";
           }}
         />
-        <div className="p-4">
-          <h3 className="text-sm text-center font-semibold text-gray-800 mb-2">
-            {/* {product.name} */}
-          </h3>
-          {/* <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300">
-            View Details
-          </button> */}
-        </div>
       </div>
-    </Link>
+      <div className="p-6">
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          {product.name}
+        </h3>
+        <p className="text-gray-600 mb-4 line-clamp-2">
+          {product.description ||
+            "High-quality poultry equipment for your farming needs"}
+        </p>
+        {/* <Link
+          to={`/product/${product.link}`}
+          className="block w-full text-center bg-red-500 text-white py-3 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300"
+        >
+          View Details
+        </Link> */}
+      </div>
+    </div>
   </motion.div>
 );
 
 const Products = () => {
-  const location = useLocation();
-  const [activeTab, setActiveTab] = useState("tab-1");
+  const [activeTab, setActiveTab] = useState("equipment");
 
   const categories = [
-    { id: "tab-1", category: "Drinking", title: "EQUIPMENTS" },
+    { id: "equipment", title: "Poultry Equipment" },
+    // { id: "feeders", title: "Feeders & Drinkers" },
+    // { id: "accessories", title: "Accessories" },
   ];
 
   const productsData = {
-    "tab-1": [
+    equipment: [
       {
-        name: "Parent Feeder",
+        name: "Parent Stock Feeder",
         image: cagebabydrinker,
-        link: "baby-chick-drinker",
+        description: "Advanced feeder system for parent stock management",
+        link: "parent-stock-feeder",
       },
       {
-        name: "Vaccinator",
-        image: chickcrate,
-        link: "chick-drinker",
-      },
-      {
-        name: "Debeaking Machine",
+        name: "Automatic Debeaking Machine",
         image: debeakingmachineautomatic,
-        link: "jumbo-drinker",
+        description: "Precision debeaking with automated control",
+        link: "automatic-debeaker",
       },
       {
-        name: "Basin Chick Feeder",
-        image: chickdrinker3ltr,
-        link: "deluxe-drinker",
+        name: "Gas Brooder",
+        image: gasbrooder,
+        description: "Temperature-controlled brooding solution",
+        link: "gas-brooder",
       },
       {
-        name: "Gas Broder",
-        image: chickfeeder3kg,
-        link: "deluxe-jumbo-drinker",
-      },
-      {
-        name: "Chick Crate",
+        name: "Manual Debeaking Machine",
         image: deberakingmachinemanual,
+        description: "Reliable manual debeaking equipment",
+        link: "manual-debeaker",
+      },
+      {
+        name: "Chick Transport Crate",
+        image: chickcrate,
+        description: "Safe and secure chick transportation",
+        link: "chick-crate",
+      },
+      {
+        name: "Grower Drinker 8L",
+        image: growerdrinker8ltr,
+        description: "Large capacity drinker for growing birds",
         link: "grower-drinker",
       },
+    ],
+    feeders: [
       {
-        name: "Debeaking Machine Automatic",
-        image: gasbrooder,
-        link: "nipples-and-pressure-regulator",
+        name: "Chick Feeder 3kg",
+        image: chickfeeder3kg,
+        description: "Efficient feeding solution for chicks",
+        link: "chick-feeder",
       },
       {
-        name: "growerdrinker8ltr",
-        image: growerdrinker8ltr,
-        link: "growerdrinker8ltr",
+        name: "Chick Drinker 3L",
+        image: chickdrinker3ltr,
+        description: "Easy-access drinking system for chicks",
+        link: "chick-drinker",
       },
     ],
+    accessories: [],
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center mb-12 my-20">
-        <h1 className="mt-2 text-4xl font-bold text-red-600 sm:text-5xl">
-          Welcome To Krishna Poultry Equipments{" "}
-          <span className="text-black">Manufacturer</span> & Trader
+      {/* Header Section */}
+      <div className="text-center mb-16">
+        <h1 className="text-4xl font-bold text-red-600 sm:text-5xl mb-6">
+          Welcome To Krishna Poultry{" "}
+          <span className="text-black">Equipments Manufacturer</span> & Traders
         </h1>
+
+        <div className="mb-8">
+          <h2 className="text-3xl font-semibold text-gray-800 inline-block border-b-4 border-red-500 pb-2">
+            Our Products
+          </h2>
+        </div>
+
+        <div className="max-w-3xl mx-auto mb-12">
+          <img
+            src={chickdrinker3ltr}
+            alt="Featured Product"
+            className="w-full h-66 object-contain rounded-xl shadow-lg"
+          />
+        
+        </div>
 
         <CounterSection />
 
-        <p className="mt-4 text-lg text-black-600">
+        <p className="mt-8 text-xl text-gray-600 max-w-2xl mx-auto">
           High-quality equipment designed to meet all your poultry farming
           needs.
         </p>
       </div>
 
-      <div className="mb-8">
-        <nav className="flex flex-wrap justify-center space-x-4">
-          {categories.map((tab) => (
+      {/* Category Navigation */}
+      <div className="mb-12">
+        <nav className="flex flex-wrap justify-center gap-4">
+          {categories.map((category) => (
             <motion.button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-6 py-3 text-sm font-medium rounded-full transition-colors duration-300 ${
-                activeTab === tab.id
-                  ? "bg-red-500 text-white"
+              key={category.id}
+              onClick={() => setActiveTab(category.id)}
+              className={`px-8 py-3 text-lg font-medium rounded-full transition-colors duration-300 ${
+                activeTab === category.id
+                  ? "bg-red-500 text-white shadow-md"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {tab.title}
+              {category.title}
             </motion.button>
           ))}
         </nav>
       </div>
 
-      <div className="mt-8">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-wrap -mx-4"
-          >
-            {productsData[activeTab]?.map((product, index) => (
-              <ProductCard key={index} product={product} />
-            ))}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+      {/* Products Grid */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex flex-wrap -mx-4"
+        >
+          {productsData[activeTab]?.map((product, index) => (
+            <ProductCard key={index} product={product} />
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
