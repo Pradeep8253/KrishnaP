@@ -11,6 +11,7 @@ import gasbrooder from "./fwdkrishnatradersproducts/gasbrooder.jpg";
 import growerdrinker8ltr from "./fwdkrishnatradersproducts/growerdrinker8ltr.jpg";
 import CounterSection from "./Products/CounterSection";
 import BasinChickDrinker from "../Pages/fwdkrishnatradersproductsmain/BasinChickDrinker2.5.jpg";
+import ImageCarousel from "./Products/ImageCrousel";
 
 const ProductCard = ({ product }) => (
   <motion.div
@@ -123,23 +124,20 @@ const Products = () => {
           Welcome To Krishna Poultry{" "}
           <span className="text-black">Equipments Manufacturer</span> & Traders
         </h1>
-
         <div className="mb-15">
           <h2 className="text-3xl font-semibold text-gray-800 inline-block border-b-4 border-red-500 pb-2">
             Our Products
           </h2>
         </div>
-
-        <div className="max-w-xl mx-auto mb-12">
+        {/* <div className="max-w-xl mx-auto mb-12">
           <img
             src={BasinChickDrinker}
             alt="Featured Product"
             className="w-full h-66 object-contain rounded-xl shadow-lg"
           />
-        </div>
-
+        </div> */}
+        <ImageCarousel />
         <CounterSection />
-
         <p className="mt-8 text-xl text-gray-600 max-w-2xl mx-auto">
           High-quality equipment designed to meet all your poultry farming
           needs.
