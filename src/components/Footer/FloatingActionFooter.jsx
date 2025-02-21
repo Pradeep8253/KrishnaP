@@ -10,6 +10,11 @@ const FloatingActionFooter = () => {
       <span className="text-sm font-medium text-center text-white justify-between ">
         Krishna Poultry Equipments Manufacturer & Traders
       </span>
+      <img
+        className="h-10"
+        src="https://mir-s3-cdn-cf.behance.net/project_modules/hd/a64c4754053637.594b42320b7c8.gif"
+        alt=""
+      />
 
       {/* WhatsApp Button - Bottom Right */}
       <a
