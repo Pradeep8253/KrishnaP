@@ -17,7 +17,7 @@ const Footer = () => {
 
   const locations = [
     {
-      name: "Hyderabad Factory - Kondapur",
+      name: "",
       address:
         "Reg. Office & Godown:- Kh. No.1090, Vikas Nagar, Meerut Road, Ghaziabad-201001 (U.P.) INDIA ",
       phone: "9440406200, 9849059508",
