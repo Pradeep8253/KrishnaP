@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { ArrowRight, Award, Settings, ShieldCheck, Package } from "lucide-react";
 import Banner from "../../../Banner/Banner";
+import chickfedding from "../fwdkrishnatradersproducts/chickfeeder3kg.jpg";
+import growerfeeder8kg from "../fwdkrishnatradersproducts/growerfeeder8kg.jpg";
+import parentfeederfemale from "../fwdkrishnatradersproducts/parentfeederfemale.jpg";
+import standardfeeder10kg from "../fwdkrishnatradersproducts/standardfeeder10kg.jpg";
 
 const FeederShowcase = () => {
   const [activeTab, setActiveTab] = useState("features");
@@ -11,20 +15,20 @@ const FeederShowcase = () => {
   const feederImages = [
     {
       src: chickfedding, // Replace with your actual image paths
-      alt: "Cage Feeder"
+      alt: "Cage Feeder",
     },
     {
-      src: "/images/feeder-2.jpg",
-      alt: "Chain Feeding System"
+      src: growerfeeder8kg,
+      alt: "Chain Feeding System",
     },
     {
-      src: "/images/feeder-3.jpg",
-      alt: "Tube Feeder"
+      src: parentfeederfemale,
+      alt: "Tube Feeder",
     },
     {
-      src: "/images/feeder-4.jpg",
-      alt: "Automatic Feeding System"
-    }
+      src: standardfeeder10kg,
+      alt: "Automatic Feeding System",
+    },
   ];
 
   const features = [
@@ -168,7 +172,7 @@ const FeederShowcase = () => {
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <p className="absolute bottom-4 left-4 text-white text-sm font-medium">
