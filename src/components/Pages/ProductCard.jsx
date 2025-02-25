@@ -1,175 +1,268 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
-import cagebabydrinker from "../Pages/fwdkrishnatradersproducts/cagebabydrinker.jpg";
-import chickcrate from "../Pages/fwdkrishnatradersproducts/chickcrate.jpg";
-import chickdrinker3ltr from "./fwdkrishnatradersproducts/chickdrinker3ltr.jpg";
-import debeakingmachineautomatic from "./fwdkrishnatradersproducts/debeakingmachineautomatic.jpg";
-import chickfeeder3kg from "./fwdkrishnatradersproducts/chickfeeder3kg.jpg";
-import deberakingmachinemanual from "./fwdkrishnatradersproducts/deberakingmachinemanual.jpg";
-import gasbrooder from "./fwdkrishnatradersproducts/gasbrooder.jpg";
-import growerdrinker8ltr from "./fwdkrishnatradersproducts/growerdrinker8ltr.jpg";
-import CounterSection from "./Products/CounterSection";
-import BasinChickDrinker from "../Pages/fwdkrishnatradersproductsmain/BasinChickDrinker2.5.jpg";
-import ImageCarousel from "./Products/ImageCrousel";
 
-const ProductCard = ({ product }) => (
-  <motion.div
-    className="w-full sm:w-1/2 lg:w-1/3 p-2 sm:p-4"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    whileHover={{ scale: 1.02 }}
-    transition={{ duration: 0.3 }}
-  >
-    <div className="bg-white rounded-xl  overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-      <div className="relative">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-48 sm:h-56 object-fit: contain"
-          onError={(e) => {
-            e.target.src = "/placeholder-image.png";
-          }}
-        />
-      </div>
-      <div className="p-4 sm:p-6">
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 text-center">
-          {product.name}
-        </h3>
-        <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-2 text-center">
-          {product.description ||
-            "High-quality poultry equipment for your farming needs"}
-        </p>
-      </div>
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Card, CardContent, CardHeader } from "../ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+
+// Sample product data
+const productData = {
+  equipment: [
+    {
+      name: "Parent Stock Feeder",
+      image: "/placeholder/400/300",
+      description: "Advanced feeder for parent stock management",
+      link: "parent-stock-feeder",
+    },
+    {
+      name: "Automatic Debeaking Machine",
+      image: "/placeholder/400/300",
+      description: "Precision debeaking with automated control",
+      link: "automatic-debeaker",
+    },
+    {
+      name: "Gas Brooder",
+      image: "/placeholder/400/300",
+      description: "Temperature-controlled brooding solution",
+      link: "gas-brooder",
+    },
+    {
+      name: "Manual Debeaking Machine",
+      image: "/placeholder/400/300",
+      description: "Reliable manual debeaking equipment",
+      link: "manual-debeaker",
+    },
+    {
+      name: "Chick Transport Crate",
+      image: "/placeholder/400/300",
+      description: "Safe and secure chick transportation",
+      link: "chick-crate",
+    },
+    {
+      name: "Grower Drinker 8L",
+      image: "/placeholder/400/300",
+      description: "Large capacity drinker for growing birds",
+      link: "grower-drinker",
+    },
+  ],
+  feeders: [
+    {
+      name: "Chick Feeder 3kg",
+      image: "/placeholder/400/300",
+      description: "Efficient feeding solution for chicks",
+      link: "chick-feeder",
+    },
+    {
+      name: "Chick Drinker 3L",
+      image: "/placeholder/400/300",
+      description: "Easy-access drinking system for chicks",
+      link: "chick-drinker",
+    },
+  ],
+  accessories: [
+    {
+      name: "Poultry Thermometer",
+      image: "/placeholder/400/300",
+      description: "Accurate temperature monitoring for your coop",
+      link: "poultry-thermometer",
+    },
+  ],
+};
+
+// ProductCard Component
+const ProductCard = ({ product }) => {
+  return (
+    <div className="group w-full p-2">
+      <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg h-full">
+        <div className="relative h-48 overflow-hidden bg-gray-100">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+        <CardHeader className="p-4">
+          <h3 className="text-lg font-semibold text-center">{product.name}</h3>
+        </CardHeader>
+        <CardContent className="px-4 pb-4 pt-0">
+          <p className="text-sm text-gray-600 text-center line-clamp-2">
+            {product.description ||
+              "High-quality poultry equipment for your farming needs"}
+          </p>
+        </CardContent>
+      </Card>
     </div>
-  </motion.div>
-);
+  );
+};
 
-const Products = () => {
-  const [activeTab, setActiveTab] = useState("equipment");
+// Counter Component
+const CounterSection = () => {
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8 max-w-4xl mx-auto">
+      {[
+        { count: "15+", label: "Years Experience" },
+        { count: "1000+", label: "Happy Customers" },
+        { count: "50+", label: "Products" },
+        { count: "15+", label: "Countries Served" },
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="bg-white rounded-lg p-4 shadow-md text-center"
+        >
+          <h3 className="text-2xl md:text-3xl font-bold text-red-600">
+            {item.count}
+          </h3>
+          <p className="text-sm md:text-base text-gray-700">{item.label}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-  const categories = [{ id: "equipment", title: "Poultry Equipment" }];
+// Image Carousel Component
+const ImageCarousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const images = [
+    "/api/placeholder/600/300",
+    "/api/placeholder/600/300",
+    "/api/placeholder/600/300",
+  ];
 
-  const productsData = {
-    equipment: [
-      {
-        name: "Parent Stock Feeder",
-        image: cagebabydrinker,
-        description: "Advanced feeder for parent stock management",
-        link: "parent-stock-feeder",
-      },
-      {
-        name: "Automatic Debeaking Machine",
-        image: debeakingmachineautomatic,
-        description: "Precision debeaking with automated control",
-        link: "automatic-debeaker",
-      },
-      {
-        name: "Gas Brooder",
-        image: gasbrooder,
-        description: "Temperature-controlled brooding solution",
-        link: "gas-brooder",
-      },
-      {
-        name: "Manual Debeaking Machine",
-        image: deberakingmachinemanual,
-        description: "Reliable manual debeaking equipment",
-        link: "manual-debeaker",
-      },
-      {
-        name: "Chick Transport Crate",
-        image: chickcrate,
-        description: "Safe and secure chick transportation",
-        link: "chick-crate",
-      },
-      {
-        name: "Grower Drinker 8L",
-        image: growerdrinker8ltr,
-        description: "Large capacity drinker for growing birds",
-        link: "grower-drinker",
-      },
-    ],
-    feeders: [
-      {
-        name: "Chick Feeder 3kg",
-        image: chickfeeder3kg,
-        description: "Efficient feeding solution for chicks",
-        link: "chick-feeder",
-      },
-      {
-        name: "Chick Drinker 3L",
-        image: chickdrinker3ltr,
-        description: "Easy-access drinking system for chicks",
-        link: "chick-drinker",
-      },
-    ],
-    accessories: [],
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
   return (
-    <div className="w-full bg-gradient-to-r from-[#9c95a1] via-[#e6a5a5] to-[#d9d8d7] px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div className="relative w-full max-w-3xl mx-auto">
+      <div className="overflow-hidden rounded-lg">
+        <div className="relative h-56 md:h-72">
+          <img
+            src={images[currentIndex]}
+            alt="Product showcase"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+      <button
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white"
+        onClick={goToPrevious}
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+      <button
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white"
+        onClick={goToNext}
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
+      <div className="flex justify-center mt-2 gap-1">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full transition-colors ${
+              currentIndex === index ? "bg-red-600" : "bg-gray-300"
+            }`}
+            onClick={() => setCurrentIndex(index)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Main Component
+const ResponsiveProductShowcase = () => {
+  return (
+    <div className="w-full bg-gradient-to-r from-gray-100 via-red-50 to-gray-100 px-4 py-10">
       {/* Header Section */}
-      <div className="text-center mb-8 sm:mb-16">
-        <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-red-600 mb-4 sm:mb-6 px-2 sm:px-4">
-          Welcome To Krishna Poultry{" "}
-          <span className="text-black">Equipments Manufacturer</span> & Traders
+      <div className="max-w-6xl mx-auto text-center mb-12">
+        <h1 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="text-red-600">Welcome To Krishna Poultry</span>{" "}
+          <span className="text-black block md:inline">
+            Equipments Manufacturer & Traders
+          </span>
         </h1>
+
         <div className="mb-8">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 inline-block border-b-4 border-red-500 pb-2">
+          <h2 className="text-2xl font-semibold text-gray-800 inline-block border-b-4 border-red-500 pb-2">
             Our Products
           </h2>
         </div>
 
-        <div className="max-w-full sm:max-w-xl mx-auto">
+        {/* Carousel */}
+        <div className="mb-8">
           <ImageCarousel />
         </div>
 
+        {/* Counter Section */}
         <CounterSection />
 
-        <p className="mt-6 sm:mt-8 text-base sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-6">
           High-quality equipment designed to meet all your poultry farming
           needs.
         </p>
       </div>
 
-      {/* Category Navigation */}
-      <div className="mb-8 sm:mb-12">
-        <nav className="flex flex-wrap justify-center gap-2 sm:gap-4 px-2 sm:px-8">
-          {categories.map((category) => (
-            <motion.button
-              key={category.id}
-              onClick={() => setActiveTab(category.id)}
-              className={`px-4 sm:px-8 py-2 sm:py-3 text-base sm:text-lg font-medium rounded-full transition-colors duration-300 ${
-                activeTab === category.id
-                  ? "bg-red-500 text-white shadow-md"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {category.title}
-            </motion.button>
-          ))}
-        </nav>
-      </div>
+      {/* Product Tabs */}
+      <div className="max-w-6xl mx-auto">
+        <Tabs defaultValue="equipment" className="w-full">
+          <div className="flex justify-center mb-8">
+            <TabsList className="bg-gray-100/80 p-1">
+              <TabsTrigger
+                value="equipment"
+                className="data-[state=active]:bg-red-500 data-[state=active]:text-white px-6 py-2"
+              >
+                Poultry Equipment
+              </TabsTrigger>
+              <TabsTrigger
+                value="feeders"
+                className="data-[state=active]:bg-red-500 data-[state=active]:text-white px-6 py-2"
+              >
+                Feeders & Drinkers
+              </TabsTrigger>
+              <TabsTrigger
+                value="accessories"
+                className="data-[state=active]:bg-red-500 data-[state=active]:text-white px-6 py-2"
+              >
+                Accessories
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
-      {/* Products Grid */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex flex-wrap -mx-2 sm:-mx-4"
-        >
-          {productsData[activeTab]?.map((product, index) => (
-            <ProductCard key={index} product={product} />
-          ))}
-        </motion.div>
-      </AnimatePresence>
+          <TabsContent value="equipment" className="mt-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {productData.equipment.map((product, index) => (
+                <ProductCard key={index} product={product} />
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="feeders" className="mt-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {productData.feeders.map((product, index) => (
+                <ProductCard key={index} product={product} />
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="accessories" className="mt-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {productData.accessories.map((product, index) => (
+                <ProductCard key={index} product={product} />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };
 
-export default Products;
+export default ResponsiveProductShowcase;
