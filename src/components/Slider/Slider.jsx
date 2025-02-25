@@ -25,12 +25,14 @@ import vaccinator from "../Pages/fwdkrishnatradersproducts/vaccinator.jpg";
 import slider1 from "../Slider/sloider1.png";
 import slider2 from "../Slider/slider2.png";
 import slider3 from "../Slider/slider4.png";
+import slider5 from "../Slider/slider5.png"
+import slider6 from "../Slider/slider6.png"
 
 // Define your product categories for each slide
 const slides = [
   {
-    image: slider1,
-    title: "WELCOME TO KRISHNA POULTRY EQUIPMENTS",
+    image: slider5,
+    title: " Welcome to Krishna Poultry Equipments  ",
     subtitle: "EXCELLENCE IN POULTRY FARMING",
     description:
       "We provide the highest quality poultry products with modern farming techniques",
@@ -47,7 +49,7 @@ const slides = [
   },
   {
     image: slider2,
-    title: "QUALITY PRODUCTS FARM EQUIPMENTS",
+    title: "     Quality Products Farm Equipments",
     subtitle: "Using state-of-the-art equipment for the best results",
     description: "Providing advanced solutions for modern poultry farming",
     products: [
@@ -58,7 +60,7 @@ const slides = [
     ],
   },
   {
-    image: slider3,
+    image: slider6,
     title: "Sustainable Practices",
     subtitle: "Committed to environmental sustainability and animal welfare",
     description:
@@ -95,7 +97,7 @@ const EnhancedSlider = () => {
         }}
         speed={700}
         autoplay={{
-          delay: 5000, // Increased delay to give users time to see products
+          delay: 5000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}
@@ -113,24 +115,24 @@ const EnhancedSlider = () => {
         }}
         keyboard={{ enabled: true }}
         lazy={{ loadPrevNext: true }}
-        className="h-screen"
+        className="h-screen md:h-screen"
         onSlideChange={handleSlideChange}
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative flex items-center justify-center h-screen w-screen overflow-hidden ">
+            <div className="relative flex items-center justify-center h-screen w-screen overflow-hidden">
               {/* Full-Screen Background Image */}
               <img
                 src={slide.image}
                 alt="slide"
-                className="absolute inset-0 w-full h-full object-fit: contain"
+                className="absolute inset-0 w-full h-full object-cover md:object-fit"
               />
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/70 to-black/10 transition-opacity duration-1000"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-black/10 transition-opacity duration-500"></div>
 
               {/* Content */}
-              <div className="relative z-10 text-center w-full max-w-7xl mx-auto px-8 flex flex-col items-center">
+              <div className="relative z-10 text-center w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={index}
@@ -144,7 +146,7 @@ const EnhancedSlider = () => {
                       initial={{ y: 40, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.7, delay: 0.2 }}
-                      className="text-10xl sm:text-5xl md:text-10xl font-bold text-white mb-4 leading-tight relative"
+                      className="text-2xl sm:text-3xl md:text-5xl  bg-gradient-to-r from-[#f3a719] via-[#ffc355] to-[#ffe3c7] stroke-orange-600 bg-clip-text text-transparent  font-bold mb-2 sm:mb-4 leading-tight relative mt-40"
                     >
                       {slide.title}
                     </motion.h1>
@@ -153,19 +155,19 @@ const EnhancedSlider = () => {
                       initial={{ y: 30, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.6, delay: 0.5 }}
-                      className="mb-8 text-lg sm:text-xl md:text-2xl text-white/90 font-light"
+                      className="mb-4 sm:mb-6 text-sm sm:text-base md:text-xl text-white/90 font-light px-2"
                     >
                       {slide.description}
                     </motion.p>
 
-                    {/* Product Grid */}
+                    {/* Product Grid - Adjusted for better mobile display */}
                     <motion.div
                       initial={{ y: 40, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.8, delay: 0.8 }}
-                      className="w-full max-w-6xl mt-4"
+                      className="w-full max-w-6xl mt-1 sm:mt-4"
                     >
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 ">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
                         {slide.products.map((product, prodIndex) => (
                           <motion.div
                             key={prodIndex}
@@ -175,35 +177,25 @@ const EnhancedSlider = () => {
                               duration: 0.5,
                               delay: 0.9 + prodIndex * 0.1,
                             }}
-                            className="bg-white/10 backdrop-blur-md rounded-lg overflow-hidden shadow-lg border border-white/20 hover:border-yellow-400/50 transition-all duration-300 group "
+                            className="bg-white/10 backdrop-blur-md rounded-lg overflow-hidden shadow-lg border border-white/20 hover:border-yellow-400/50 transition-all duration-300 group"
                           >
-                            <div className="relative h-32 sm:h-44 md:h-52 overflow-hidden  ">
+                            <div className="relative h-24 sm:h-32 md:h-40 overflow-hidden">
                               <img
                                 src={product.image}
                                 alt={product.name}
-                                className="w-full h-full object-fit: contain transition-transform duration-500 group-hover:scale-110 "
+                                className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-110"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <div className="p-3 sm:p-4 text-center">
-                              <h3 className="text-white font-medium text-sm sm:text-base mb-1 group-hover:text-yellow-400 transition-colors">
+                            <div className="p-2 sm:p-3 text-center">
+                              <h3 className="text-white font-medium text-xs sm:text-sm md:text-base truncate group-hover:text-yellow-400 transition-colors">
                                 {product.name}
                               </h3>
-                              <p className="text-yellow-400 font-bold text-sm sm:text-base">
-                                {/* {product.price} */}
-                              </p>
                             </div>
                           </motion.div>
                         ))}
                       </div>
                     </motion.div>
-
-                    <motion.div
-                      initial={{ y: 30, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.6, delay: 1.2 }}
-                      className="mt-8"
-                    ></motion.div>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -211,15 +203,15 @@ const EnhancedSlider = () => {
           </SwiperSlide>
         ))}
 
-        {/* Enhanced Navigation Buttons */}
-        <div className="swiper-button-next !w-14 !h-14 !right-6"></div>
-        <div className="swiper-button-prev !w-14 !h-14 !left-6"></div>
+        {/* Enhanced Navigation Buttons - Adjusted for mobile */}
+        <div className="swiper-button-next !w-8 !h-8 sm:!w-10 sm:!h-10 md:!w-14 md:!h-14 !right-2 sm:!right-4 md:!right-6 !after:text-xs sm:!after:text-sm md:!after:text-base"></div>
+        <div className="swiper-button-prev !w-8 !h-8 sm:!w-10 sm:!h-10 md:!w-14 md:!h-14 !left-2 sm:!left-4 md:!left-6 !after:text-xs sm:!after:text-sm md:!after:text-base"></div>
 
         {/* Enhanced Pagination */}
-        <div className="swiper-pagination !bottom-10"></div>
+        <div className="swiper-pagination !bottom-4 sm:!bottom-6 md:!bottom-10"></div>
       </Swiper>
 
-      {/* Slide indicators */}
+      {/* Slide indicators - Hidden on mobile, visible on larger screens */}
       <div className="absolute bottom-6 left-6 z-20 hidden md:flex items-center space-x-3">
         {slides.map((_, index) => (
           <div
@@ -253,18 +245,49 @@ const EnhancedSlider = () => {
 
         .swiper-button-next::after,
         .swiper-button-prev::after {
-          font-size: 1.5rem;
-          font-weight: bold;
+          font-size: 1rem;
+        }
+
+        @media (min-width: 640px) {
+          .swiper-button-next::after,
+          .swiper-button-prev::after {
+            font-size: 1.25rem;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .swiper-button-next::after,
+          .swiper-button-prev::after {
+            font-size: 1.5rem;
+          }
         }
 
         .swiper-pagination-bullet {
-          width: 12px;
-          height: 12px;
+          width: 8px;
+          height: 8px;
           background-color: rgba(255, 255, 255, 0.4);
-          border: 2px solid transparent;
+          border: 1px solid transparent;
           opacity: 1;
           transition: all 0.3s ease;
-          margin: 0 6px;
+          margin: 0 4px;
+        }
+
+        @media (min-width: 640px) {
+          .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            border-width: 1.5px;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            margin: 0 6px;
+            border-width: 2px;
+          }
         }
 
         .swiper-pagination-bullet-active {
