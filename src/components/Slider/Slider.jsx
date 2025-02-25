@@ -202,7 +202,7 @@ const EnhancedSlider = () => {
             {product.name}
           </h3>
           <p className="text-yellow-300 text-xs sm:text-sm font-semibold mt-1">
-            {product.price}
+            {/* {product.price} */}
           </p>
           {isActive && (
             <motion.div
@@ -328,13 +328,13 @@ const EnhancedSlider = () => {
                     className="flex flex-col h-full"
                   >
                     {/* Header Section */}
-                    <div className="mb-4 flex-shrink-0">
+                    <div className="mb-4 flex-shrink-0 mx-20 my-20">
                       <motion.div
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.7, delay: 0.2 }}
                       >
-                        <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-200 bg-clip-text text-transparent pb-1">
+                        <h1 className="text-.xl md:text-3xl  sm:text-2xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-200 bg-clip-text text-transparent pb-1">
                           {slide.title}
                         </h1>
                         <motion.div
@@ -396,14 +396,14 @@ const EnhancedSlider = () => {
 
                     {/* CTA Button Section */}
                     <div className="mt-4 flex-shrink-0">
-                      <motion.button
+                      {/* <motion.button
                         initial={{ y: 10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5, delay: 1 }}
                         className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black font-medium rounded-full py-3 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/30 text-sm sm:text-base"
                       >
                         Browse All Products
-                      </motion.button>
+                      </motion.button> */}
                     </div>
                   </motion.div>
                 </AnimatePresence>
