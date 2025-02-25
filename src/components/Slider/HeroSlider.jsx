@@ -102,7 +102,7 @@ const WelcomeSlider = () => {
 
   return (
     <div className="relative w-full rounded-xl shadow-xl overflow-hidden">
-      <div className="relative min-h-[500px] sm:min-h-[600px] md:min-h-[800px]">
+      <div className="relative min-h-[500px] sm:min-h-[600px] md:min-h-[1000px]">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={activeSlide}

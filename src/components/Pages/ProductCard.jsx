@@ -21,22 +21,22 @@ const ProductCard = ({ product }) => (
     whileHover={{ scale: 1.02 }}
     transition={{ duration: 0.3 }}
   >
-    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-white rounded-xl  overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
       <div className="relative">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-48 sm:h-56 object-cover"
+          className="w-full h-48 sm:h-56 object-fit: contain"
           onError={(e) => {
             e.target.src = "/placeholder-image.png";
           }}
         />
       </div>
       <div className="p-4 sm:p-6">
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 text-center">
           {product.name}
         </h3>
-        <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-2">
+        <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-2 text-center">
           {product.description ||
             "High-quality poultry equipment for your farming needs"}
         </p>
