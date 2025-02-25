@@ -13,7 +13,7 @@ import {
   EffectFade,
 } from "swiper/modules";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft, ExternalLink } from "lucide-react";
+import { ChevronRight, ChevronLeft, ExternalLink, Info } from "lucide-react";
 
 // Import your images here
 import BasinChickDrinker from "../Pages/fwdkrishnatradersproductsmain/BasinChickDrinker2.5.jpg";
@@ -39,14 +39,30 @@ const slides = [
     description:
       "We provide the highest quality poultry products with modern farming techniques",
     products: [
-      { image: BasinChickDrinker, name: "Basin Chick Drinker", price: "₹650" },
-      { image: flamegun, name: "Flame Gun 4-Way", price: "₹1200" },
+      {
+        image: BasinChickDrinker,
+        name: "Basin Chick Drinker",
+        price: "₹650",
+        description: "High-quality durable plastic basin for chicks",
+      },
+      {
+        image: flamegun,
+        name: "Flame Gun 4-Way",
+        price: "₹1200",
+        description: "Versatile 4-way flame gun for farm sanitation",
+      },
       {
         image: jumboautomaticdrinkerclassic,
         name: "Jumbo Automatic Drinker",
         price: "₹950",
+        description: "Large capacity automatic water drinker",
       },
-      { image: SprinklerSmall, name: "Small Sprinkler", price: "₹450" },
+      {
+        image: SprinklerSmall,
+        name: "Small Sprinkler",
+        price: "₹450",
+        description: "Efficient water distribution system",
+      },
     ],
   },
   {
@@ -55,10 +71,30 @@ const slides = [
     subtitle: "Using state-of-the-art equipment for the best results",
     description: "Providing advanced solutions for modern poultry farming",
     products: [
-      { image: chickfeeder3kg, name: "Chick Feeder 3kg", price: "₹520" },
-      { image: chickcrate, name: "Chick Crate", price: "₹850" },
-      { image: nippledrinker, name: "Nipple Drinker", price: "₹380" },
-      { image: vaccinator, name: "Vaccinator", price: "₹720" },
+      {
+        image: chickfeeder3kg,
+        name: "Chick Feeder 3kg",
+        price: "₹520",
+        description: "Durable 3kg capacity feeder for chicks",
+      },
+      {
+        image: chickcrate,
+        name: "Chick Crate",
+        price: "₹850",
+        description: "Spacious and ventilated transportation crate",
+      },
+      {
+        image: nippledrinker,
+        name: "Nipple Drinker",
+        price: "₹380",
+        description: "Leak-proof precision nipple drinking system",
+      },
+      {
+        image: vaccinator,
+        name: "Vaccinator",
+        price: "₹720",
+        description: "Precise vaccination tool for poultry health",
+      },
     ],
   },
   {
@@ -68,10 +104,30 @@ const slides = [
     description:
       "Balancing productivity with eco-friendly poultry farming solutions",
     products: [
-      { image: BasinChickDrinker, name: "Basin Chick Drinker", price: "₹650" },
-      { image: nippledrinker, name: "Nipple Drinker", price: "₹380" },
-      { image: SprinklerSmall, name: "Small Sprinkler", price: "₹450" },
-      { image: flamegun, name: "Flame Gun 4-Way", price: "₹1200" },
+      {
+        image: BasinChickDrinker,
+        name: "Basin Chick Drinker",
+        price: "₹650",
+        description: "High-quality durable plastic basin for chicks",
+      },
+      {
+        image: nippledrinker,
+        name: "Nipple Drinker",
+        price: "₹380",
+        description: "Leak-proof precision nipple drinking system",
+      },
+      {
+        image: SprinklerSmall,
+        name: "Small Sprinkler",
+        price: "₹450",
+        description: "Efficient water distribution system",
+      },
+      {
+        image: flamegun,
+        name: "Flame Gun 4-Way",
+        price: "₹1200",
+        description: "Versatile 4-way flame gun for farm sanitation",
+      },
     ],
   },
 ];
@@ -79,7 +135,9 @@ const slides = [
 const EnhancedSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
+  const [activeProductIndex, setActiveProductIndex] = useState(null);
+  const [showAllProducts, setShowAllProducts] = useState(false);
 
   // Handle responsive layout
   useEffect(() => {
@@ -97,39 +155,105 @@ const EnhancedSlider = () => {
 
   const handleSlideChange = (swiper) => {
     setActiveIndex(swiper.realIndex);
+    setActiveProductIndex(null);
+    setShowAllProducts(false);
   };
 
-  const ProductCard = ({ product, index }) => {
+  const toggleProductDetails = (index) => {
+    if (activeProductIndex === index) {
+      setActiveProductIndex(null);
+    } else {
+      setActiveProductIndex(index);
+    }
+  };
+
+  const toggleShowAllProducts = () => {
+    setShowAllProducts(!showAllProducts);
+  };
+
+  const ProductCard = ({ product, index, isActive }) => {
     return (
       <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
+        initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-        className="bg-white/15 backdrop-blur-md rounded-lg overflow-hidden shadow-xl border border-white/20 hover:border-yellow-400 transition-all duration-300 group"
+        transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+        className={`bg-white/15 backdrop-blur-md rounded-lg overflow-hidden shadow-xl border border-white/20 hover:border-yellow-400 transition-all duration-300 ${
+          isActive ? "border-yellow-400 ring-2 ring-yellow-400/50" : ""
+        }`}
+        onClick={() => toggleProductDetails(index)}
       >
-        <div className="relative h-24 sm:h-32 md:h-40 overflow-hidden">
+        <div className="relative h-28 sm:h-32 md:h-36 overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
             className="w-full h-full object-contain object-center transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          {!isActive && (
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          )}
         </div>
-        <div className="p-2 sm:p-3 text-center">
-          <h3 className="text-white font-medium text-xs sm:text-sm md:text-base truncate group-hover:text-yellow-400 transition-colors">
+        <div className="p-2 sm:p-3">
+          <h3
+            className={`font-medium text-sm sm:text-base truncate ${
+              isActive ? "text-yellow-400" : "text-white"
+            }`}
+          >
             {product.name}
           </h3>
-          <p className="text-yellow-300 text-xs md:text-sm font-semibold mt-1 opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <p className="text-yellow-300 text-xs sm:text-sm font-semibold mt-1">
             {product.price}
           </p>
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-black text-xs md:text-sm font-medium py-1 px-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-1">
-            View <ExternalLink size={14} />
-          </button>
+          {isActive && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="mt-2"
+            >
+              <p className="text-white/90 text-xs sm:text-sm">
+                {product.description}
+              </p>
+              <button className="mt-2 bg-yellow-500 hover:bg-yellow-600 text-black text-xs font-medium py-1 px-3 rounded-full flex items-center gap-1 w-full justify-center">
+                View Details <ExternalLink size={12} />
+              </button>
+            </motion.div>
+          )}
         </div>
       </motion.div>
+    );
+  };
+
+  // Mobile product layout component
+  const MobileProductLayout = ({ products }) => {
+    const visibleProducts = showAllProducts ? products : products.slice(0, 2);
+
+    return (
+      <div className="w-full">
+        <div className="grid grid-cols-2 gap-3">
+          {visibleProducts.map((product, prodIndex) => (
+            <ProductCard
+              key={prodIndex}
+              product={product}
+              index={prodIndex}
+              isActive={activeProductIndex === prodIndex}
+            />
+          ))}
+        </div>
+        {products.length > 2 && (
+          <motion.button
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.8 }}
+            onClick={toggleShowAllProducts}
+            className="w-full mt-3 py-2 bg-white/10 hover:bg-white/20 text-white text-sm rounded-md backdrop-blur-sm border border-white/10 transition-all flex items-center justify-center"
+          >
+            {showAllProducts
+              ? "Show Less"
+              : `Show All ${products.length} Products`}
+          </motion.button>
+        )}
+      </div>
     );
   };
 
@@ -174,36 +298,26 @@ const EnhancedSlider = () => {
         }}
         keyboard={{ enabled: true }}
         lazy={{ loadPrevNext: true }}
-        className="h-screen"
+        className="h-[100vh]" // Fixed height to prevent layout shifts
         onSlideChange={handleSlideChange}
         onSwiper={setSwiperInstance}
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index} className="bg-black">
-            <div className="relative flex items-center justify-center h-screen w-full overflow-hidden">
-              {/* Parallax Background Image */}
-              <motion.div
-                initial={{ scale: 1.1 }}
-                animate={{
-                  scale: activeIndex === index ? 1 : 1.1,
-                  y: activeIndex === index ? 0 : 20,
-                }}
-                transition={{ duration: 6 }}
-                className="absolute inset-0 w-full h-full"
-              >
+            <div className="relative flex flex-col h-full w-full overflow-hidden">
+              {/* Parallax Background Image with overlay */}
+              <div className="absolute inset-0 w-full h-full">
                 <img
                   src={slide.image}
                   alt={`Krishna Poultry - ${slide.title}`}
-                  className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-500"
+                  className="absolute inset-0 w-full h-full object-cover"
                   loading={index === 0 ? "eager" : "lazy"}
                 />
-              </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+              </div>
 
-              {/* Enhanced Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60 md:from-black/40 md:via-black/30 md:to-black/50"></div>
-
-              {/* Content */}
-              <div className="relative z-10 text-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+              {/* Content Container - Optimized for Mobile */}
+              <div className="relative z-10 flex flex-col h-full pt-10 pb-16 px-4">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`slide-${index}-${activeIndex}`}
@@ -211,73 +325,86 @@ const EnhancedSlider = () => {
                     animate={{ opacity: activeIndex === index ? 1 : 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="flex flex-col items-center w-full"
+                    className="flex flex-col h-full"
                   >
-                    {/* Title with animated gradient */}
-                    <motion.div
-                      initial={{ y: 40, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.7, delay: 0.2 }}
-                      className="relative mt-16 md:mt-24 lg:mt-20 mb-4"
-                    >
-                      <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-200 bg-clip-text text-transparent pb-1">
-                        {slide.title}
-                      </h1>
+                    {/* Header Section */}
+                    <div className="mb-4 flex-shrink-0">
                       <motion.div
-                        initial={{ width: "0%" }}
-                        animate={{ width: "80%" }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="h-1 bg-gradient-to-r from-yellow-500 to-amber-300 rounded-full mx-auto mt-2"
-                      />
-                    </motion.div>
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                      >
+                        <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-200 bg-clip-text text-transparent pb-1">
+                          {slide.title}
+                        </h1>
+                        <motion.div
+                          initial={{ width: "0%" }}
+                          animate={{ width: "80%" }}
+                          transition={{ duration: 1, delay: 0.5 }}
+                          className="h-1 bg-gradient-to-r from-yellow-500 to-amber-300 rounded-full mt-1 max-w-xs"
+                        />
+                      </motion.div>
 
-                    {/* Subtitle */}
-                    <motion.h2
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.6, delay: 0.4 }}
-                      className="text-sm sm:text-base md:text-lg text-yellow-100 font-medium tracking-wider uppercase mb-3"
-                    >
-                      {slide.subtitle}
-                    </motion.h2>
+                      <motion.h2
+                        initial={{ y: 10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        className="text-xs sm:text-sm text-yellow-100 font-medium tracking-wider uppercase mt-2"
+                      >
+                        {slide.subtitle}
+                      </motion.h2>
 
-                    {/* Description */}
-                    <motion.p
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.6, delay: 0.6 }}
-                      className="mb-6 sm:mb-8 text-sm sm:text-base md:text-xl text-white/90 font-light max-w-2xl"
-                    >
-                      {slide.description}
-                    </motion.p>
+                      <motion.p
+                        initial={{ y: 10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.6 }}
+                        className="mt-2 text-sm text-white/90 font-light"
+                      >
+                        {slide.description}
+                      </motion.p>
+                    </div>
 
-                    {/* Product Grid - Responsive Layout */}
-                    <motion.div
-                      initial={{ y: 40, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.8, delay: 0.7 }}
-                      className="w-full max-w-6xl mt-2 sm:mt-6"
-                    >
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-                        {slide.products.map((product, prodIndex) => (
-                          <ProductCard
-                            key={prodIndex}
-                            product={product}
-                            index={prodIndex}
-                          />
-                        ))}
-                      </div>
-                    </motion.div>
+                    {/* Product Section - Flexible space */}
+                    <div className="flex-grow flex flex-col justify-center overflow-y-auto py-2 scrollbar-hide">
+                      <motion.div
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.7, delay: 0.5 }}
+                        className="w-full"
+                      >
+                        <h3 className="text-white font-medium text-sm sm:text-base mb-3 flex items-center">
+                          <span className="mr-2">Featured Products</span>
+                          <Info size={14} className="text-yellow-400" />
+                        </h3>
 
-                    {/* CTA Button */}
-                    <motion.button
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.5, delay: 1.2 }}
-                      className="mt-8 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black font-medium rounded-full px-6 py-3 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/30"
-                    >
-                      Browse All Products
-                    </motion.button>
+                        {isMobile ? (
+                          <MobileProductLayout products={slide.products} />
+                        ) : (
+                          <div className="grid grid-cols-4 gap-4">
+                            {slide.products.map((product, prodIndex) => (
+                              <ProductCard
+                                key={prodIndex}
+                                product={product}
+                                index={prodIndex}
+                                isActive={activeProductIndex === prodIndex}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </motion.div>
+                    </div>
+
+                    {/* CTA Button Section */}
+                    <div className="mt-4 flex-shrink-0">
+                      <motion.button
+                        initial={{ y: 10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 1 }}
+                        className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black font-medium rounded-full py-3 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/30 text-sm sm:text-base"
+                      >
+                        Browse All Products
+                      </motion.button>
+                    </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -285,29 +412,29 @@ const EnhancedSlider = () => {
           </SwiperSlide>
         ))}
 
-        {/* Custom Navigation Buttons with Lucide Icons */}
-        <div className="custom-navigation absolute inset-0 z-20 pointer-events-none">
-          <div className="h-full flex items-center justify-between px-2 sm:px-4 md:px-8">
+        {/* Custom Navigation Buttons - Optimized for Mobile */}
+        <div className="custom-navigation absolute inset-x-0 top-1/2 z-20 pointer-events-none transform -translate-y-1/2">
+          <div className="h-full flex items-center justify-between px-2">
             <button
               onClick={() => swiperInstance?.slidePrev()}
-              className="swiper-button-prev flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white hover:bg-yellow-500/70 hover:text-black transition-all duration-300 pointer-events-auto"
+              className="swiper-button-prev flex items-center justify-center w-8 h-8 rounded-full bg-black/30 backdrop-blur-md border border-white/10 text-white hover:bg-yellow-500/70 hover:text-black transition-all duration-300 pointer-events-auto"
             >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={() => swiperInstance?.slideNext()}
-              className="swiper-button-next flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white hover:bg-yellow-500/70 hover:text-black transition-all duration-300 pointer-events-auto"
+              className="swiper-button-next flex items-center justify-center w-8 h-8 rounded-full bg-black/30 backdrop-blur-md border border-white/10 text-white hover:bg-yellow-500/70 hover:text-black transition-all duration-300 pointer-events-auto"
             >
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Enhanced Pagination - Animated and Responsive */}
-        <div className="swiper-pagination !bottom-4 sm:!bottom-6 md:!bottom-8"></div>
+        {/* Enhanced Pagination - Positioned for better mobile visibility */}
+        <div className="swiper-pagination !bottom-4"></div>
       </Swiper>
 
-      {/* Slide indicators - Responsive visibility */}
+      {/* Slide indicators - Desktop only */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 hidden lg:flex items-center space-x-4">
         {slides.map((slide, index) => (
           <button
@@ -346,20 +473,20 @@ const EnhancedSlider = () => {
 
       <style jsx>{`
         .swiper-pagination-bullet {
-          width: 10px;
-          height: 10px;
+          width: 8px;
+          height: 8px;
           background-color: rgba(255, 255, 255, 0.3);
           border: 1px solid rgba(255, 255, 255, 0.5);
           opacity: 1;
           transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-          margin: 0 5px;
+          margin: 0 4px;
         }
 
         @media (min-width: 640px) {
           .swiper-pagination-bullet {
-            width: 12px;
-            height: 12px;
-            margin: 0 6px;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
           }
         }
 
@@ -367,6 +494,15 @@ const EnhancedSlider = () => {
           background-color: #eab308;
           transform: scale(1.3);
           box-shadow: 0 0 10px rgba(234, 179, 8, 0.6);
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </section>
