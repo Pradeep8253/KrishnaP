@@ -154,13 +154,10 @@ const CounterSection = () => {
 };
 
 // Image Carousel Component
+
 const ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const images = [
-    "/api/placeholder/600/300",
-    "/api/placeholder/600/300",
-    "/api/placeholder/600/300",
-  ];
+  const images = [gasbrooder, chickdrinker3ltr, deberakingmachinemanual];
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
@@ -176,27 +173,32 @@ const ImageCarousel = () => {
 
   return (
     <div className="relative w-full max-w-3xl mx-auto">
-      <div className="overflow-hidden rounded-lg">
-        <div className="relative h-56 md:h-72">
-          <img
-            src={images[currentIndex]}
-            alt="Product showcase"
-            className="w-full h-full object-fit"
-          />
-        </div>
+      {/* Image Wrapper with Background to Avoid Empty Space */}
+      <div className="overflow-hidden rounded-lg bg-gray-200 flex items-center justify-center">
+        <img
+          src={images[currentIndex]}
+          alt="Product showcase"
+          className="w-full h-[300px] md:h-[400px] object-contain"
+        />
       </div>
+
+      {/* Previous Button */}
       <button
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white"
         onClick={goToPrevious}
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
+
+      {/* Next Button */}
       <button
         className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white"
         onClick={goToNext}
       >
         <ChevronRight className="h-6 w-6" />
       </button>
+
+      {/* Dots Indicator */}
       <div className="flex justify-center mt-2 gap-1">
         {images.map((_, index) => (
           <button
@@ -211,6 +213,8 @@ const ImageCarousel = () => {
     </div>
   );
 };
+
+
 
 // Main Component
 const ResponsiveProductShowcase = () => {

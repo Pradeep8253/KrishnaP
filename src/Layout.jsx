@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
+import Header from "./components/Header/Sheader";
 
 
 function Layout() {
@@ -8,10 +8,10 @@ function Layout() {
 
   return (
     <>
-    <Header />
-      <Outlet/>
-     
-      
+      {/* <Header /> */}
+      <Header />
+      <Outlet />
+
       <Footer />
     </>
   );

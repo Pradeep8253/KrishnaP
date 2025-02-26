@@ -317,7 +317,7 @@ const EnhancedSlider = () => {
               </div>
 
               {/* Content Container - Centered */}
-              <div className="relative z-10 flex flex-col h-full pt-10 pb-16 px-4">
+              <div className="relative z-10 flex flex-col h-full pt-10 pb-16 px-4 w-full max-w-none">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`slide-${index}-${activeIndex}`}
@@ -325,10 +325,10 @@ const EnhancedSlider = () => {
                     animate={{ opacity: activeIndex === index ? 1 : 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="flex flex-col h-full"
+                    className="flex flex-col h-full w-full"
                   >
                     {/* Header Section - Centered */}
-                    <div className="mb-4 flex-shrink-0 text-center mx-auto max-w-xl my-16">
+                    <div className="mb-4 flex-shrink-0 text-center mx-auto max-w-xl my-16 w-full">
                       <motion.div
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -366,7 +366,7 @@ const EnhancedSlider = () => {
                     </div>
 
                     {/* Product Section - Centered with reduced size */}
-                    <div className="flex-grow flex flex-col justify-center overflow-y-auto py-2 scrollbar-hide max-w-4xl mx-auto w-full">
+                    <div className="flex-grow flex flex-col justify-center overflow-x-hidden overflow-y-auto py-2 scrollbar-hide w-full max-w-6xl mx-auto">
                       <motion.div
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -381,7 +381,7 @@ const EnhancedSlider = () => {
                         {isMobile ? (
                           <MobileProductLayout products={slide.products} />
                         ) : (
-                          <div className="grid grid-cols-4 gap-4">
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
                             {slide.products.map((product, prodIndex) => (
                               <ProductCard
                                 key={prodIndex}
@@ -393,18 +393,6 @@ const EnhancedSlider = () => {
                           </div>
                         )}
                       </motion.div>
-                    </div>
-
-                    {/* CTA Button Section - Centered */}
-                    <div className="mt-4 flex-shrink-0 max-w-xs mx-auto w-full">
-                      {/* <motion.button
-                        initial={{ y: 10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 1 }}
-                        className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black font-medium rounded-full py-3 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/30 text-sm sm:text-base"
-                      >
-                        Browse All Products
-                      </motion.button> */}
                     </div>
                   </motion.div>
                 </AnimatePresence>

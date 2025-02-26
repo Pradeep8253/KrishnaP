@@ -6,41 +6,31 @@ const FloatingActionFooter = () => {
   };
 
   return (
-    <div className="bg-black backdrop-blur-sm fixed bottom-0 w-full py-3 px-4 flex justify-between items-center z-50">
-      <span className="text-sm font-medium text-center text-white justify-between ">
-        Krishna Poultry Equipments Manufacturer & Traders
-      </span>
-      {/* <img
-        className="h-10"
-        src="https://mir-s3-cdn-cf.behance.net/project_modules/hd/a64c4754053637.594b42320b7c8.gif"
-        alt=""
-      /> */}
-
-      {/* WhatsApp Button - Bottom Right */}
+    <div className="fixed bottom-4 right-4 flex flex-col gap-3">
+      {/* WhatsApp Button */}
       <a
-        href="https://wa.me/9870214842"
+        href="https://wa.me/yourphonenumber"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-20 right-4 bg-green-500 p-3 rounded-full flex items-center justify-center hover:bg-green-600 transition-all shadow-lg"
+        className="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600"
       >
-        <FaWhatsapp className="text-xl text-white" />
+        <FaWhatsapp size={24} />
       </a>
 
-      {/* Phone Call Button - Bottom Left */}
+      {/* Phone Call Button */}
       <a
-        href="tel:
-+91-9870214842 "
-        className="fixed bottom-20 left-4 bg-blue-500 p-3 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all shadow-lg"
+        href="tel:+yourphonenumber"
+        className="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600"
       >
-        <FaPhoneAlt className="text-xl text-white" />
+        <FaPhoneAlt size={24} />
       </a>
 
-      {/* Scroll to Top Button - Bottom Right */}
+      {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="fixed bottom-32 right-4 bg-red-500 p-3 rounded-full flex items-center justify-center hover:bg-red-600 transition-all shadow-lg"
+        className="bg-gray-500 text-white p-3 rounded-full shadow-lg hover:bg-gray-600"
       >
-        <FaArrowUp className="text-xl text-white" />
+        <FaArrowUp size={24} />
       </button>
     </div>
   );
