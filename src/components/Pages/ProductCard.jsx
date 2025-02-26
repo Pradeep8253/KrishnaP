@@ -1,4 +1,16 @@
 import React, { useState } from "react";
+import standardfeeder from "../Pages/fwdkrishnatradersproducts/standardfeeder10kg.jpg";
+import debeakingmachineautomatic from "../Pages/fwdkrishnatradersproducts/debeakingmachineautomatic.jpg";
+import gasbrooder from "../Pages/fwdkrishnatradersproducts/gasbrooder.jpg";
+import deberakingmachinemanual from "../Pages/fwdkrishnatradersproducts/deberakingmachinemanual.jpg";
+import chickcrate from "../Pages/fwdkrishnatradersproducts/chickcrate.jpg";
+import growerdrinker8ltr from "../Pages/fwdkrishnatradersproducts/growerdrinker8ltr.jpg";
+import chickfeeder3kg from "../Pages/fwdkrishnatradersproducts/chickfeeder3kg.jpg";
+import chickdrinker3ltr from "../Pages/fwdkrishnatradersproducts/chickdrinker3ltr.jpg";
+import nippledrinker from "../Pages/fwdkrishnatradersproducts/nippledrinker.jpg";
+import BasinChickDrinker from "../Pages/fwdkrishnatradersproductsmain/BasinChickDrinker2.5.jpg";
+import vaccinator from "../Pages/fwdkrishnatradersproducts/vaccinator.jpg";
+import sunheaterwith from "../Pages/fwdkrishnatradersproductsmain/sunheaterwith-timer.jpg";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent, CardHeader } from "../ui/card";
@@ -9,37 +21,37 @@ const productData = {
   equipment: [
     {
       name: "Parent Stock Feeder",
-      image: "/placeholder/400/300",
+      image: standardfeeder,
       description: "Advanced feeder for parent stock management",
       link: "parent-stock-feeder",
     },
     {
       name: "Automatic Debeaking Machine",
-      image: "/placeholder/400/300",
+      image: debeakingmachineautomatic,
       description: "Precision debeaking with automated control",
       link: "automatic-debeaker",
     },
     {
       name: "Gas Brooder",
-      image: "/placeholder/400/300",
+      image: gasbrooder,
       description: "Temperature-controlled brooding solution",
       link: "gas-brooder",
     },
     {
       name: "Manual Debeaking Machine",
-      image: "/placeholder/400/300",
+      image: deberakingmachinemanual,
       description: "Reliable manual debeaking equipment",
       link: "manual-debeaker",
     },
     {
       name: "Chick Transport Crate",
-      image: "/placeholder/400/300",
+      image: chickcrate,
       description: "Safe and secure chick transportation",
       link: "chick-crate",
     },
     {
       name: "Grower Drinker 8L",
-      image: "/placeholder/400/300",
+      image: growerdrinker8ltr,
       description: "Large capacity drinker for growing birds",
       link: "grower-drinker",
     },
@@ -47,21 +59,39 @@ const productData = {
   feeders: [
     {
       name: "Chick Feeder 3kg",
-      image: "/placeholder/400/300",
+      image: chickfeeder3kg,
       description: "Efficient feeding solution for chicks",
       link: "chick-feeder",
     },
     {
       name: "Chick Drinker 3L",
-      image: "/placeholder/400/300",
+      image: chickdrinker3ltr,
+      description: "Easy-access drinking system for chicks",
+      link: "chick-drinker",
+    },
+    {
+      name: "Nipple Drinker ",
+      image: nippledrinker,
+      description: "Easy-access drinking system for chicks",
+      link: "chick-drinker",
+    },
+    {
+      name: "BasinChick Drinker ",
+      image: BasinChickDrinker,
       description: "Easy-access drinking system for chicks",
       link: "chick-drinker",
     },
   ],
   accessories: [
     {
-      name: "Poultry Thermometer",
-      image: "/placeholder/400/300",
+      name: "Vaccinator ",
+      image: vaccinator,
+      description: "Accurate temperature monitoring for your coop",
+      link: "poultry-thermometer",
+    },
+    {
+      name: "Sunheater ",
+      image: sunheaterwith,
       description: "Accurate temperature monitoring for your coop",
       link: "poultry-thermometer",
     },
@@ -71,20 +101,22 @@ const productData = {
 // ProductCard Component
 const ProductCard = ({ product }) => {
   return (
-    <div className="group w-full p-2">
+    <div className="group w-full p-2 sm:p-4">
       <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg h-full">
-        <div className="relative h-48 overflow-hidden bg-gray-100">
+        <div className="relative bg-gray-100 w-full">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-auto max-h-[350px] sm:max-h-[450px] object-contain aspect-video sm:aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
           />
         </div>
-        <CardHeader className="p-4">
-          <h3 className="text-lg font-semibold text-center">{product.name}</h3>
+        <CardHeader className="p-3 sm:p-4">
+          <h3 className="text-base sm:text-lg font-semibold text-center">
+            {product.name}
+          </h3>
         </CardHeader>
-        <CardContent className="px-4 pb-4 pt-0">
-          <p className="text-sm text-gray-600 text-center line-clamp-2">
+        <CardContent className="px-3 sm:px-4 pb-4 pt-0">
+          <p className="text-sm sm:text-base text-gray-600 text-center line-clamp-2">
             {product.description ||
               "High-quality poultry equipment for your farming needs"}
           </p>
@@ -93,6 +125,9 @@ const ProductCard = ({ product }) => {
     </div>
   );
 };
+
+
+
 
 // Counter Component
 const CounterSection = () => {
@@ -146,7 +181,7 @@ const ImageCarousel = () => {
           <img
             src={images[currentIndex]}
             alt="Product showcase"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-fit"
           />
         </div>
       </div>
