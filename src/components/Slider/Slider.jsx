@@ -182,7 +182,7 @@ const EnhancedSlider = () => {
         }`}
         onClick={() => toggleProductDetails(index)}
       >
-        <div className="relative h-28 sm:h-32 md:h-36 overflow-hidden">
+        <div className="relative h-24 sm:h-28 md:h-32 overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
@@ -305,7 +305,7 @@ const EnhancedSlider = () => {
         {slides.map((slide, index) => (
           <SwiperSlide key={index} className="bg-black">
             <div className="relative flex flex-col h-full w-full overflow-hidden">
-              {/* Parallax Background Image with overlay */}
+              {/* Parallax Background Image with overlay - Enhanced opacity */}
               <div className="absolute inset-0 w-full h-full">
                 <img
                   src={slide.image}
@@ -313,10 +313,10 @@ const EnhancedSlider = () => {
                   className="absolute inset-0 w-full h-full object-cover"
                   loading={index === 0 ? "eager" : "lazy"}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
               </div>
 
-              {/* Content Container - Optimized for Mobile */}
+              {/* Content Container - Centered */}
               <div className="relative z-10 flex flex-col h-full pt-10 pb-16 px-4">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -327,21 +327,22 @@ const EnhancedSlider = () => {
                     transition={{ duration: 0.5 }}
                     className="flex flex-col h-full"
                   >
-                    {/* Header Section */}
-                    <div className="mb-4 flex-shrink-0 mx-20 my-20">
+                    {/* Header Section - Centered */}
+                    <div className="mb-4 flex-shrink-0 text-center mx-auto max-w-xl my-16">
                       <motion.div
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.7, delay: 0.2 }}
+                        className="flex flex-col items-center"
                       >
-                        <h1 className="text-.xl md:text-3xl  sm:text-2xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-200 bg-clip-text text-transparent pb-1">
+                        <h1 className="text-2xl md:text-4xl sm:text-3xl font-bold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-200 bg-clip-text text-transparent pb-1">
                           {slide.title}
                         </h1>
                         <motion.div
                           initial={{ width: "0%" }}
                           animate={{ width: "80%" }}
                           transition={{ duration: 1, delay: 0.5 }}
-                          className="h-1 bg-gradient-to-r from-yellow-500 to-amber-300 rounded-full mt-1 max-w-xs"
+                          className="h-1 bg-gradient-to-r from-yellow-500 to-amber-300 rounded-full mt-2 max-w-xs"
                         />
                       </motion.div>
 
@@ -349,7 +350,7 @@ const EnhancedSlider = () => {
                         initial={{ y: 10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
-                        className="text-xs sm:text-sm text-yellow-100 font-medium tracking-wider uppercase mt-2"
+                        className="text-sm sm:text-base text-yellow-100 font-medium tracking-wider uppercase mt-3"
                       >
                         {slide.subtitle}
                       </motion.h2>
@@ -358,21 +359,21 @@ const EnhancedSlider = () => {
                         initial={{ y: 10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.6 }}
-                        className="mt-2 text-sm text-white/90 font-light"
+                        className="mt-3 text-sm sm:text-base text-white/90 font-light max-w-md mx-auto"
                       >
                         {slide.description}
                       </motion.p>
                     </div>
 
-                    {/* Product Section - Flexible space */}
-                    <div className="flex-grow flex flex-col justify-center overflow-y-auto py-2 scrollbar-hide">
+                    {/* Product Section - Centered with reduced size */}
+                    <div className="flex-grow flex flex-col justify-center overflow-y-auto py-2 scrollbar-hide max-w-4xl mx-auto w-full">
                       <motion.div
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.7, delay: 0.5 }}
                         className="w-full"
                       >
-                        <h3 className="text-white font-medium text-sm sm:text-base mb-3 flex items-center">
+                        <h3 className="text-white font-medium text-sm sm:text-base mb-3 flex items-center justify-center">
                           <span className="mr-2">Featured Products</span>
                           <Info size={14} className="text-yellow-400" />
                         </h3>
@@ -394,8 +395,8 @@ const EnhancedSlider = () => {
                       </motion.div>
                     </div>
 
-                    {/* CTA Button Section */}
-                    <div className="mt-4 flex-shrink-0">
+                    {/* CTA Button Section - Centered */}
+                    <div className="mt-4 flex-shrink-0 max-w-xs mx-auto w-full">
                       {/* <motion.button
                         initial={{ y: 10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -412,25 +413,25 @@ const EnhancedSlider = () => {
           </SwiperSlide>
         ))}
 
-        {/* Custom Navigation Buttons - Optimized for Mobile */}
+        {/* Custom Navigation Buttons */}
         <div className="custom-navigation absolute inset-x-0 top-1/2 z-20 pointer-events-none transform -translate-y-1/2">
           <div className="h-full flex items-center justify-between px-2">
             <button
               onClick={() => swiperInstance?.slidePrev()}
-              className="swiper-button-prev flex items-center justify-center w-8 h-8 rounded-full bg-black/30 backdrop-blur-md border border-white/10 text-white hover:bg-yellow-500/70 hover:text-black transition-all duration-300 pointer-events-auto"
+              className="swiper-button-prev flex items-center justify-center w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white hover:bg-yellow-500/70 hover:text-black transition-all duration-300 pointer-events-auto"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={() => swiperInstance?.slideNext()}
-              className="swiper-button-next flex items-center justify-center w-8 h-8 rounded-full bg-black/30 backdrop-blur-md border border-white/10 text-white hover:bg-yellow-500/70 hover:text-black transition-all duration-300 pointer-events-auto"
+              className="swiper-button-next flex items-center justify-center w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white hover:bg-yellow-500/70 hover:text-black transition-all duration-300 pointer-events-auto"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Enhanced Pagination - Positioned for better mobile visibility */}
+        {/* Enhanced Pagination */}
         <div className="swiper-pagination !bottom-4"></div>
       </Swiper>
 

@@ -5,20 +5,21 @@ import HeroSlider from "../Slider/HeroSlider";
 import ProductCard from "../Pages/ProductCard"
 import EnhancedSlider from "../Slider/Slider"
 import PremiumSlider from "../Slider/Shadcn";
+import Testimonials from "./Testimonials";
 
 
 const Home = () => {
   return (
     <div>
-      <PremiumSlider />
+      {/* <PremiumSlider /> */}
       {/* <HeroSlider /> */}
-      {/* <EnhancedSlider /> */}
+      <EnhancedSlider />
       {/* <BannerSlider /> */}
       {/* <SaiKrishnaIndustries /> */}
       {/* <MainComponent /> */}
       {/* <Popup/> */}
       <ProductCard />
-      {/* <Testimonials/> */}
+      <Testimonials/>
     </div>
   );
 };
