@@ -4,6 +4,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  ChevronRight,
   Phone,
   Facebook,
   Twitter,
@@ -13,58 +14,43 @@ import {
   Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// import { Card } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Card } from "../ui/card";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const headerRef = useRef(null);
-  const mobileMenuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    const handleClickOutside = (event) => {
-      if (
-        isMobileMenuOpen &&
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target) &&
-        !headerRef.current.contains(event.target)
-      ) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
     window.addEventListener("scroll", handleScroll);
-    document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isMobileMenuOpen]);
+  }, []);
 
+  // Close mobile menu on window resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024 && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
+      if (window.innerWidth >= 1024 && isOpen) {
+        setIsOpen(false);
       }
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [isMobileMenuOpen]);
+  }, [isOpen]);
 
   const productLinks = [
     { name: "FEEDER", path: "/products/feeder" },
@@ -74,10 +60,8 @@ const Header = () => {
     { name: "OTHERS", path: "/products/others" },
   ];
 
-  const handleNavLinkClick = () => {
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
+  const toggleMobileProducts = () => {
+    setMobileProductsOpen(!mobileProductsOpen);
   };
 
   return (
@@ -103,13 +87,14 @@ const Header = () => {
               <img
                 src="/logo.png"
                 alt="Krishna Poultry Logo"
-                className={`transition-all duration-300 ${
+                className={`transition-all duration-300 rounded-xl ${
                   isScrolled ? "h-16" : "h-15"
                 } w-auto`}
               />
             </Link>
           </div>
 
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             <Link
               to="/"
@@ -158,116 +143,131 @@ const Header = () => {
             </Button>
           </nav>
 
-          <Sheet>
+          {/* Mobile Navigation */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" className="lg:hidden">
                 <Menu className="w-6 h-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent>
-              <div className="p-5 flex justify-between items-center border-b border-gray-200">
-                <div>
-                  <h2 className="text-red-500 font-bold text-xl">
-                    KRISHNA POULTRY
-                  </h2>
-                  <p className="text-gray-500 text-sm">
-                    MANUFACTURERS & TRADER
-                  </p>
-                </div>
-                <Button
-                  variant="ghost"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <X className="w-6 h-6" />
-                </Button>
+            <SheetContent side="right" className="p-0 max-w-full w-72">
+              <div className="p-5 flex flex-col justify-center items-center border-b border-gray-200 bg-red-50">
+                <img 
+                  src="/logo.png" 
+                  alt="Krishna Poultry Logo" 
+                  className="h-10 w-auto mb-2 mr-15" 
+                />
+                {/* <h2 className="text-red-600 font-bold text-xl">
+                  KRISHNA POULTRY
+                </h2>
+                <p className="text-gray-500 text-sm">
+                  MANUFACTURERS & TRADER
+                </p> */}
               </div>
 
               <nav className="p-5">
-                <div className="space-y-1">
-                  <Link
-                    to="/"
-                    className="mobile-nav-link"
-                    onClick={handleNavLinkClick}
-                  >
-                    HOME
-                  </Link>
-                  <Link
-                    to="/about"
-                    className="mobile-nav-link"
-                    onClick={handleNavLinkClick}
-                  >
-                    ABOUT
-                  </Link>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        className="w-full flex items-center justify-start"
-                      >
-                        PRODUCTS
-                        <ChevronDown className="w-4 h-4 ml-1" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      {productLinks.map((product) => (
-                        <DropdownMenuItem key={product.path}>
-                          <Link to={product.path}>{product.name}</Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <Link
-                    to="/contact"
-                    className="mobile-nav-link"
-                    onClick={handleNavLinkClick}
-                  >
-                    CONTACT
-                  </Link>
+                <div className="space-y-3">
+                  <SheetClose asChild>
+                    <Link
+                      to="/"
+                      className="block py-2 px-4 rounded-lg hover:bg-red-50 text-gray-800 hover:text-red-600 transition-colors"
+                    >
+                      HOME
+                    </Link>
+                  </SheetClose>
+                  
+                  <SheetClose asChild>
+                    <Link
+                      to="/about"
+                      className="block py-2 px-4 rounded-lg hover:bg-red-50 text-gray-800 hover:text-red-600 transition-colors"
+                    >
+                      ABOUT
+                    </Link>
+                  </SheetClose>
+                  
+                  {/* Collapsible Products Menu */}
+                  <div className="rounded-lg overflow-hidden border">
+                    <button 
+                      onClick={toggleMobileProducts}
+                      className="w-full p-3 text-left flex items-center justify-between bg-gray-50 hover:bg-red-50 hover:text-red-600 transition-colors"
+                    >
+                      <span className="font-medium">PRODUCTS</span>
+                      {mobileProductsOpen ? (
+                        <ChevronDown className="w-5 h-5" />
+                      ) : (
+                        <ChevronRight className="w-5 h-5" />
+                      )}
+                    </button>
+                    
+                    {mobileProductsOpen && (
+                      <div className="p-2 space-y-1 bg-white border-t">
+                        {productLinks.map((product) => (
+                          <SheetClose key={product.path} asChild>
+                            <Link
+                              to={product.path}
+                              className="block py-2 px-3 rounded hover:bg-gray-100 text-gray-700 text-sm"
+                            >
+                              {product.name}
+                            </Link>
+                          </SheetClose>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <SheetClose asChild>
+                    <Link
+                      to="/contact"
+                      className="block py-2 px-4 rounded-lg hover:bg-red-50 text-gray-800 hover:text-red-600 transition-colors"
+                    >
+                      CONTACT
+                    </Link>
+                  </SheetClose>
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-gray-200">
                   <a
                     href="tel:9246659508"
-                    className="flex items-center space-x-3 text-gray-700 hover:text-red-700 transition-colors"
+                    className="flex items-center space-x-3 p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
                   >
                     <Phone size={20} />
                     <span className="font-medium">924-665-9508</span>
                   </a>
                   <a
                     href="mailto:contact@krishnapoultry.com"
-                    className="flex items-center space-x-3 mt-4 text-gray-700 hover:text-red-700 transition-colors"
+                    className="flex items-center space-x-3 mt-4 p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     <Mail size={20} />
-                    <span className="font-medium">
+                    <span className="font-medium text-sm">
                       contact@krishnapoultry.com
                     </span>
                   </a>
-                  <div className="flex space-x-6 mt-6">
+                  <div className="flex justify-center space-x-6 mt-6">
                     <a
                       href="#"
                       aria-label="Facebook"
-                      className="text-gray-500 hover:text-red-700 transition-colors"
+                      className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
                       <Facebook size={20} />
                     </a>
                     <a
                       href="#"
                       aria-label="Twitter"
-                      className="text-gray-500 hover:text-red-700 transition-colors"
+                      className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
                       <Twitter size={20} />
                     </a>
                     <a
                       href="#"
                       aria-label="YouTube"
-                      className="text-gray-500 hover:text-red-700 transition-colors"
+                      className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
                       <Youtube size={20} />
                     </a>
                     <a
                       href="#"
                       aria-label="LinkedIn"
-                      className="text-gray-500 hover:text-red-700 transition-colors"
+                      className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
                       <Linkedin size={20} />
                     </a>

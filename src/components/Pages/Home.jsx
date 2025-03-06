@@ -1,24 +1,20 @@
 import React from "react";
 import SaiKrishnaIndustries from "./SaiKrishnaIndustries";
 import MainComponent from "./MainComponents";
-import HeroSlider from "../Slider/HeroSlider";
 import ProductCard from "../Pages/ProductCard"
 import EnhancedSlider from "../Slider/Slider"
-import PremiumSlider from "../Slider/Shadcn";
 import Testimonials from "./Testimonials";
+import AutoSlider from './../Slider/Slider3';
 
 
 const Home = () => {
   return (
     <div>
-      {/* <PremiumSlider /> */}
-      {/* <HeroSlider /> */}
-      <EnhancedSlider />
-      {/* <BannerSlider /> */}
-      {/* <SaiKrishnaIndustries /> */}
-      {/* <MainComponent /> */}
-      {/* <Popup/> */}
-      <ProductCard />
+      {/* <EnhancedSlider /> */}
+ 
+      <AutoSlider/>
+
+      <ProductCard/>
       <Testimonials/>
     </div>
   );

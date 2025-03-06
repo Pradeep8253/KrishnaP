@@ -266,12 +266,7 @@ const ResponsiveProductShowcase = () => {
               >
                 Feeders & Drinkers
               </TabsTrigger>
-              <TabsTrigger
-                value="accessories"
-                className="data-[state=active]:bg-red-500 data-[state=active]:text-white px-6 py-2"
-              >
-                Accessories
-              </TabsTrigger>
+             
             </TabsList>
           </div>
 

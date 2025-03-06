@@ -76,16 +76,12 @@ const Header = () => {
   return (
     <header
       ref={headerRef}
-      className={`fixed w-full z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-white shadow-lg"
-          : "bg-gradient-to-b from-danger/40 to-transparent"
-      }`}
+      className={`fixed w-full z-50 transition-all duration-500 ${isScrolled
+        ? "bg-white shadow-lg"
+        : "bg-gradient-to-b from-danger/40 to-transparent"
+        }`}
     >
-      {/* Top Bar */}
-      {/* <TopHeader /> */}
 
-      {/* Main Header */}
       <div
         className="container mx-auto px-4 transition-all duration-300"
         style={{
@@ -101,15 +97,14 @@ const Header = () => {
               <img
                 src="/logo.png"
                 alt="Krishna Poultry Logo"
-                className={`transition-all duration-300 ${
-                  isScrolled ? "h-16" : "h-15"
-                } w-auto`}
+                className={`transition-all duration-300 w-auto ${isScrolled ? "h-10 md:h-16" : "h-12 md:h-20"
+                  }`}
               />
+
             </Link>
             <div
-              className={`hidden md:block  duration-300 ${
-                isScrolled ? "opacity-100" : "opacity-90"
-              }`}
+              className={`hidden md:block  duration-300 ${isScrolled ? "opacity-100" : "opacity-90"
+                }`}
             >
               {/* <h1 className="text-red-500 font-bold text-xl tracking-tight  ">
                 KRISHNA POULTRY EQUIP
@@ -128,17 +123,15 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-8">
             <Link
               to="/"
-              className={`nav-link ${
-                isScrolled ? "text-gray-800" : "text-white"
-              }`}
+              className={`nav-link ${isScrolled ? "text-gray-800" : "text-white"
+                }`}
             >
               HOME
             </Link>
             <Link
               to="/about"
-              className={`nav-link ${
-                isScrolled ? "text-gray-800" : "text-white"
-              }`}
+              className={`nav-link ${isScrolled ? "text-gray-800" : "text-white"
+                }`}
             >
               ABOUT
             </Link>
@@ -151,24 +144,21 @@ const Header = () => {
             >
               <Link
                 to="/products"
-                className={`nav-link flex items-center ${
-                  isScrolled ? "text-gray-800" : "text-white"
-                }`}
+                className={`nav-link flex items-center ${isScrolled ? "text-gray-800" : "text-white"
+                  }`}
               >
                 PRODUCTS
                 <ChevronDown
-                  className={`ml-1 w-4 h-4 transition-transform duration-300 ${
-                    activeDropdown === "products" ? "rotate-180" : ""
-                  }`}
+                  className={`ml-1 w-4 h-4 transition-transform duration-300 ${activeDropdown === "products" ? "rotate-180" : ""
+                    }`}
                 />
               </Link>
 
               <div
-                className={`absolute top-full left-0 w-64 bg-white shadow-xl rounded-lg py-2 transition-all duration-300 transform ${
-                  activeDropdown === "products"
-                    ? "opacity-100 visible translate-y-0"
-                    : "opacity-0 invisible -translate-y-4"
-                }`}
+                className={`absolute top-full left-0 w-64 bg-white shadow-xl rounded-lg py-2 transition-all duration-300 transform ${activeDropdown === "products"
+                  ? "opacity-100 visible translate-y-0"
+                  : "opacity-0 invisible -translate-y-4"
+                  }`}
               >
                 {productLinks.map((product, index) => (
                   <Link
@@ -192,9 +182,8 @@ const Header = () => {
 
             <Link
               to="/contact"
-              className={`nav-link ${
-                isScrolled ? "text-gray-800" : "text-white"
-              }`}
+              className={`nav-link ${isScrolled ? "text-gray-800" : "text-white"
+                }`}
             >
               CONTACT
             </Link>
@@ -213,15 +202,13 @@ const Header = () => {
             <span className="absolute inset-0 bg-red-100 scale-0 group-hover:scale-100 transition-transform duration-200 rounded-md"></span>
             {isMobileMenuOpen ? (
               <X
-                className={`w-6 h-6 relative z-10 transition-colors duration-200 ${
-                  isScrolled ? "text-gray-800" : "text-white"
-                } group-hover:text-red-700`}
+                className={`w-6 h-6 relative z-10 transition-colors duration-200 ${isScrolled ? "text-gray-800" : "text-white"
+                  } group-hover:text-red-700`}
               />
             ) : (
               <Menu
-                className={`w-6 h-6 relative z-10 transition-colors duration-200 ${
-                  isScrolled ? "text-gray-800" : "text-white"
-                } group-hover:text-red-700`}
+                className={`w-6 h-6 relative z-10 transition-colors duration-200 ${isScrolled ? "text-gray-800" : "text-white"
+                  } group-hover:text-red-700`}
               />
             )}
           </button>
@@ -230,19 +217,18 @@ const Header = () => {
 
       {/* Mobile Navigation Overlay */}
       <div
-        className={`fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 z-40 lg:hidden ${
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+        className={`fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 z-40 lg:hidden ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
         onClick={() => setIsMobileMenuOpen(false)}
       ></div>
 
       {/* Mobile Navigation Panel */}
       <div
         ref={mobileMenuRef}
-        className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white shadow-xl z-50 transition-transform duration-500 ease-in-out transform lg:hidden ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white shadow-xl z-50 transition-transform duration-500 ease-in-out transform lg:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
+        {/* Header */}
         <div className="p-5 flex justify-between items-center border-b border-gray-200">
           <div>
             <h2 className="text-red-500 font-bold text-xl">KRISHNA POULTRY</h2>
@@ -256,63 +242,48 @@ const Header = () => {
           </button>
         </div>
 
+        {/* Navigation */}
         <nav className="p-5">
-          <div className="space-y-1">
-            <Link
-              to="/"
-              className="mobile-nav-link"
-              onClick={handleNavLinkClick}
-            >
+          <div className="space-y-2">
+            <Link to="/" className="mobile-nav-link" onClick={handleNavLinkClick}>
               HOME
             </Link>
 
-            <Link
-              to="/about"
-              className="mobile-nav-link"
-              onClick={handleNavLinkClick}
-            >
+            <Link to="/about" className="mobile-nav-link" onClick={handleNavLinkClick}>
               ABOUT
             </Link>
 
-            <div className="mobile-dropdown">
+            {/* Dropdown Menu for Products */}
+            <div className="relative">
               <button
-                className="w-full flex items-center justify-items-start mobile-nav-link"
+                className="w-full flex items-center justify-between py-2 text-gray-700 hover:text-red-700 transition-colors"
                 onClick={() =>
-                  setActiveDropdown(
-                    activeDropdown === "mobile-products"
-                      ? null
-                      : "mobile-products"
-                  )
+                  setActiveDropdown(activeDropdown === "mobile-products" ? null : "mobile-products")
                 }
               >
                 PRODUCTS
                 <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-300 ${
-                    activeDropdown === "mobile-products" ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 transition-transform ${activeDropdown === "mobile-products" ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
+              {/* Dropdown Items */}
               <div
-                className={`space-y-1 pl-4 overflow-hidden transition-all duration-300 ${
-                  activeDropdown === "mobile-products"
-                    ? "max-h-96 opacity-100"
-                    : "max-h-0 opacity-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ${activeDropdown === "mobile-products" ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                  }`}
               >
                 {productLinks.map((product, index) => (
                   <Link
                     key={product.path}
                     to={product.path}
-                    className="block py-2 pl-2 border-l-2 border-red-100 text-gray-600 hover:text-red-700 hover:border-red-700 transition-all"
+                    className="block py-2 pl-4 border-l-2 border-red-100 text-gray-600 hover:text-red-700 hover:border-red-700 transition-all"
                     onClick={handleNavLinkClick}
                     style={{
                       transitionDelay: `${index * 50}ms`,
                       opacity: activeDropdown === "mobile-products" ? 1 : 0,
                       transform:
-                        activeDropdown === "mobile-products"
-                          ? "translateX(0)"
-                          : "translateX(-10px)",
+                        activeDropdown === "mobile-products" ? "translateX(0)" : "translateX(-10px)",
                     }}
                   >
                     {product.name}
@@ -321,20 +292,16 @@ const Header = () => {
               </div>
             </div>
 
-            <Link
-              to="/contact"
-              className="mobile-nav-link"
-              onClick={handleNavLinkClick}
-            >
+            <Link to="/contact" className="mobile-nav-link" onClick={handleNavLinkClick}>
               CONTACT
             </Link>
           </div>
 
+          {/* Contact & Social Links */}
           <div className="mt-8 pt-6 border-t border-gray-200">
             <a
               href="tel:9246659508"
               className="flex items-center space-x-3 text-gray-700 hover:text-red-700 transition-colors"
-              onClick={handleNavLinkClick}
             >
               <Phone size={20} />
               <span className="font-medium">924-665-9508</span>
@@ -343,45 +310,30 @@ const Header = () => {
             <a
               href="mailto:contact@krishnapoultry.com"
               className="flex items-center space-x-3 mt-4 text-gray-700 hover:text-red-700 transition-colors"
-              onClick={handleNavLinkClick}
             >
               <Mail size={20} />
               <span className="font-medium">contact@krishnapoultry.com</span>
             </a>
 
+            {/* Social Icons */}
             <div className="flex space-x-6 mt-6">
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="text-gray-500 hover:text-red-700 transition-colors"
-              >
+              <a href="#" aria-label="Facebook" className="text-gray-500 hover:text-red-700 transition-colors">
                 <Facebook size={20} />
               </a>
-              <a
-                href="#"
-                aria-label="Twitter"
-                className="text-gray-500 hover:text-red-700 transition-colors"
-              >
+              <a href="#" aria-label="Twitter" className="text-gray-500 hover:text-red-700 transition-colors">
                 <Twitter size={20} />
               </a>
-              <a
-                href="#"
-                aria-label="YouTube"
-                className="text-gray-500 hover:text-red-700 transition-colors"
-              >
+              <a href="#" aria-label="YouTube" className="text-gray-500 hover:text-red-700 transition-colors">
                 <Youtube size={20} />
               </a>
-              <a
-                href="#"
-                aria-label="LinkedIn"
-                className="text-gray-500 hover:text-red-700 transition-colors"
-              >
+              <a href="#" aria-label="LinkedIn" className="text-gray-500 hover:text-red-700 transition-colors">
                 <Linkedin size={20} />
               </a>
             </div>
           </div>
         </nav>
       </div>
+
 
       {/* Custom CSS */}
     </header>

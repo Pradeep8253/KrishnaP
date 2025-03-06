@@ -310,7 +310,7 @@ const EnhancedSlider = () => {
                 <img
                   src={slide.image}
                   alt={`Krishna Poultry - ${slide.title}`}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-fit"
                   loading={index === 0 ? "eager" : "lazy"}
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/20"></div>
