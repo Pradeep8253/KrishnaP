@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   Menu,
-  X,
   ChevronDown,
   ChevronRight,
   Phone,
@@ -14,20 +13,15 @@ import {
   Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { Card } from "../ui/card";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
   const headerRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,6 +45,20 @@ const Header = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isOpen]);
+
+  // Handle click outside desktop dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDesktopDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const productLinks = [
     { name: "FEEDER", path: "/products/feeder" },
@@ -87,7 +95,7 @@ const Header = () => {
               <img
                 src="/logo.png"
                 alt="Krishna Poultry Logo"
-                className={`transition-all duration-300 rounded-xl ${
+                className={`transition-all duration-300 rounded-2xl ${
                   isScrolled ? "h-16" : "h-15"
                 } w-auto`}
               />
@@ -98,7 +106,7 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-8">
             <Link
               to="/"
-              className={`nav-link ${
+              className={`nav-link relative px-2 py-1 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-red-600 after:left-0 after:-bottom-1 hover:after:w-full after:transition-all ${
                 isScrolled ? "text-gray-800" : "text-white"
               }`}
             >
@@ -106,56 +114,86 @@ const Header = () => {
             </Link>
             <Link
               to="/about"
-              className={`nav-link ${
+              className={`nav-link relative px-2 py-1 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-red-600 after:left-0 after:-bottom-1 hover:after:w-full after:transition-all ${
                 isScrolled ? "text-gray-800" : "text-white"
               }`}
             >
               ABOUT
             </Link>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="flex items-center">
-                  PRODUCTS
-                  <ChevronDown className="ml-1 w-4 h-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                {productLinks.map((product) => (
-                  <DropdownMenuItem key={product.path}>
-                    <Link to={product.path}>{product.name}</Link>
-                  </DropdownMenuItem>
+            {/* Improved Desktop Dropdown - works with both hover and click */}
+            <div 
+              ref={dropdownRef}
+              className="relative group"
+              onMouseEnter={() => setDesktopDropdownOpen(true)}
+              onMouseLeave={() => setDesktopDropdownOpen(false)}
+            >
+              <button 
+                onClick={() => setDesktopDropdownOpen(!desktopDropdownOpen)}
+                className={`flex items-center px-4 py-2 rounded-md focus:outline-none group-hover:text-red-600 transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-red-600 after:left-0 after:-bottom-1 group-hover:after:w-full after:transition-all ${
+                  isScrolled ? "text-gray-800 hover:bg-gray-100/50" : "text-white hover:bg-white/10"
+                }`}
+                aria-expanded={desktopDropdownOpen}
+                aria-haspopup="true"
+              >
+                PRODUCTS
+                <ChevronDown className={`ml-1 w-4 h-4 transition-transform duration-200 ${desktopDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              <div 
+                className={`absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 z-50 transform origin-top-left transition-all duration-200 ${
+                  desktopDropdownOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
+                }`}
+              >
+                {productLinks.map((product, index) => (
+                  <Link
+                    key={product.path}
+                    to={product.path}
+                    className={`block px-4 py-2.5 text-gray-800 hover:bg-red-50 hover:text-red-600 transition-colors ${
+                      index !== productLinks.length - 1 ? 'border-b border-gray-100' : ''
+                    }`}
+                    onClick={() => setDesktopDropdownOpen(false)}
+                  >
+                    {product.name}
+                  </Link>
                 ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+              </div>
+            </div>
 
             <Link
               to="/contact"
-              className={`nav-link ${
+              className={`nav-link relative px-2 py-1 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-red-600 after:left-0 after:-bottom-1 hover:after:w-full after:transition-all ${
                 isScrolled ? "text-gray-800" : "text-white"
               }`}
             >
               CONTACT
             </Link>
 
-            <Button asChild>
-              <a href="tel:9246659508">Call Now</a>
+            <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-6 shadow-md hover:shadow-lg transition-all duration-300">
+              <a href="tel:9246659508" className="flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                <span>Call Now</span>
+              </a>
             </Button>
           </nav>
 
           {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" className="lg:hidden">
-                <Menu className="w-6 h-6" />
+              <Button 
+                variant="ghost" 
+                className="lg:hidden p-2 rounded-full hover:bg-red-100/50"
+                aria-label="Menu"
+              >
+                <Menu className={`w-6 h-6 ${isScrolled ? 'text-gray-800' : 'text-white'}`} />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="p-0 max-w-full w-72">
-              <div className="p-5 flex flex-col justify-center items-center border-b border-gray-200 bg-red-50">
+            <SheetContent side="right" className="p-0 max-w-full w-80 border-l border-red-100">
+              <div className="p-6 flex flex-col justify-center items-center border-b border-gray-200 bg-red-50">
                 <img 
                   src="/logo.png" 
                   alt="Krishna Poultry Logo" 
-                  className="h-10 w-auto mb-2 mr-15" 
+                  className="h-10 w-auto mr-20" 
                 />
                 {/* <h2 className="text-red-600 font-bold text-xl">
                   KRISHNA POULTRY
@@ -170,7 +208,7 @@ const Header = () => {
                   <SheetClose asChild>
                     <Link
                       to="/"
-                      className="block py-2 px-4 rounded-lg hover:bg-red-50 text-gray-800 hover:text-red-600 transition-colors"
+                      className="block py-3 px-4 rounded-lg hover:bg-red-50 text-gray-800 hover:text-red-600 transition-colors"
                     >
                       HOME
                     </Link>
@@ -179,46 +217,55 @@ const Header = () => {
                   <SheetClose asChild>
                     <Link
                       to="/about"
-                      className="block py-2 px-4 rounded-lg hover:bg-red-50 text-gray-800 hover:text-red-600 transition-colors"
+                      className="block py-3 px-4 rounded-lg hover:bg-red-50 text-gray-800 hover:text-red-600 transition-colors"
                     >
                       ABOUT
                     </Link>
                   </SheetClose>
                   
-                  {/* Collapsible Products Menu */}
-                  <div className="rounded-lg overflow-hidden border">
+                  {/* Improved Mobile Products Menu */}
+                  <div className="rounded-lg overflow-hidden border border-gray-200">
                     <button 
                       onClick={toggleMobileProducts}
-                      className="w-full p-3 text-left flex items-center justify-between bg-gray-50 hover:bg-red-50 hover:text-red-600 transition-colors"
+                      className="w-full py-3 px-4 text-left flex items-center justify-between bg-gray-50 hover:bg-red-50 hover:text-red-600 transition-colors"
+                      aria-expanded={mobileProductsOpen}
+                      aria-controls="mobile-products-menu"
                     >
                       <span className="font-medium">PRODUCTS</span>
-                      {mobileProductsOpen ? (
-                        <ChevronDown className="w-5 h-5" />
-                      ) : (
-                        <ChevronRight className="w-5 h-5" />
-                      )}
+                      <span className="transition-transform duration-300">
+                        {mobileProductsOpen ? (
+                          <ChevronDown className="w-5 h-5" />
+                        ) : (
+                          <ChevronRight className="w-5 h-5" />
+                        )}
+                      </span>
                     </button>
                     
-                    {mobileProductsOpen && (
+                    <div 
+                      id="mobile-products-menu"
+                      className={`overflow-hidden transition-all duration-300 ${
+                        mobileProductsOpen ? 'max-h-64' : 'max-h-0'
+                      }`}
+                    >
                       <div className="p-2 space-y-1 bg-white border-t">
                         {productLinks.map((product) => (
                           <SheetClose key={product.path} asChild>
                             <Link
                               to={product.path}
-                              className="block py-2 px-3 rounded hover:bg-gray-100 text-gray-700 text-sm"
+                              className="block py-2.5 px-4 rounded hover:bg-gray-100 text-gray-700 text-sm transition-colors"
                             >
                               {product.name}
                             </Link>
                           </SheetClose>
                         ))}
                       </div>
-                    )}
+                    </div>
                   </div>
                   
                   <SheetClose asChild>
                     <Link
                       to="/contact"
-                      className="block py-2 px-4 rounded-lg hover:bg-red-50 text-gray-800 hover:text-red-600 transition-colors"
+                      className="block py-3 px-4 rounded-lg hover:bg-red-50 text-gray-800 hover:text-red-600 transition-colors"
                     >
                       CONTACT
                     </Link>
@@ -228,48 +275,48 @@ const Header = () => {
                 <div className="mt-8 pt-6 border-t border-gray-200">
                   <a
                     href="tel:9246659508"
-                    className="flex items-center space-x-3 p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                    className="flex items-center space-x-3 p-3 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
                   >
                     <Phone size={20} />
                     <span className="font-medium">924-665-9508</span>
                   </a>
                   <a
                     href="mailto:contact@krishnapoultry.com"
-                    className="flex items-center space-x-3 mt-4 p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+                    className="flex items-center space-x-3 mt-4 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     <Mail size={20} />
                     <span className="font-medium text-sm">
                       contact@krishnapoultry.com
                     </span>
                   </a>
-                  <div className="flex justify-center space-x-6 mt-6">
+                  <div className="flex justify-center space-x-4 mt-6">
                     <a
                       href="#"
                       aria-label="Facebook"
-                      className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+                      className="p-2.5 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
-                      <Facebook size={20} />
+                      <Facebook size={18} />
                     </a>
                     <a
                       href="#"
                       aria-label="Twitter"
-                      className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+                      className="p-2.5 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
-                      <Twitter size={20} />
+                      <Twitter size={18} />
                     </a>
                     <a
                       href="#"
                       aria-label="YouTube"
-                      className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+                      className="p-2.5 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
-                      <Youtube size={20} />
+                      <Youtube size={18} />
                     </a>
                     <a
                       href="#"
                       aria-label="LinkedIn"
-                      className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+                      className="p-2.5 rounded-full bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
                     >
-                      <Linkedin size={20} />
+                      <Linkedin size={18} />
                     </a>
                   </div>
                 </div>

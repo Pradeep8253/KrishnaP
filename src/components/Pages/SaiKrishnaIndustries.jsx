@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ArrowRight, Award, Factory, Users, Package } from "lucide-react";
 
+
 const PoultryEquipmentCompany = () => {
   const [activeTab, setActiveTab] = useState("infrastructure");
 
