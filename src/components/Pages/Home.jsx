@@ -5,6 +5,7 @@ import ProductCard from "../Pages/ProductCard"
 
 import Testimonials from "./Testimonials";
 import AutoSlider from './../Slider/Slider3';
+import TopProducts from "./TopProducts";
 
 
 const Home = () => {
@@ -14,9 +15,12 @@ const Home = () => {
  
       <AutoSlider/>
 
-      <ProductCard/>
+      <TopProducts/>
+
+      {/* <ProductCard/> */}
       <SaiKrishnaIndustries/>
       <Testimonials/>
+
     </div>
   );
 };
